@@ -1,0 +1,572 @@
+[01-Aug-2023 07:09:01 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Admin::print_pdf(), 0 passed in /home/production/public_html/system/core/CodeIgniter.php on line 359 and exactly 1 expected in /home/production/public_html/application/controllers/admin.php:1014
+Stack trace:
+#0 /home/production/public_html/system/core/CodeIgniter.php(359): Admin->print_pdf()
+#1 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#2 {main}
+  thrown in /home/production/public_html/application/controllers/admin.php on line 1014
+[02-Aug-2023 07:55:58 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Admin::print_pdf(), 0 passed in /home/production/public_html/system/core/CodeIgniter.php on line 359 and exactly 1 expected in /home/production/public_html/application/controllers/admin.php:1014
+Stack trace:
+#0 /home/production/public_html/system/core/CodeIgniter.php(359): Admin->print_pdf()
+#1 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#2 {main}
+  thrown in /home/production/public_html/application/controllers/admin.php on line 1014
+[15-Jan-2024 17:13:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:13:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:14:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:14:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[15-Jan-2024 17:14:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_pconnect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:91
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_pconnect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/admin.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Admin->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 91
+[16-Jan-2024 10:14:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:14:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[16-Jan-2024 10:15:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php:73
+Stack trace:
+#0 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysql_driver->db_connect()
+#1 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#2 /home/production/public_html/system/core/Loader.php(346): DB(Array, NULL)
+#3 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#4 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#5 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#6 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#7 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#8 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#9 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysql/mysql_driver.php on line 73
+[23-Jan-2024 15:06:08 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Admin::print_pdf(), 0 passed in /home/production/public_html/system/core/CodeIgniter.php on line 359 and exactly 1 expected in /home/production/public_html/application/controllers/admin.php:1014
+Stack trace:
+#0 /home/production/public_html/system/core/CodeIgniter.php(359): Admin->print_pdf()
+#1 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#2 {main}
+  thrown in /home/production/public_html/application/controllers/admin.php on line 1014
+[19-Mar-2024 00:29:53 UTC] PHP Deprecated:  Optional parameter $level declared before required parameter $message is implicitly treated as a required parameter in /home/production/public_html/system/core/Common.php on line 351
+[19-Mar-2024 00:29:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysqli_connect() in /home/production/public_html/system/database/drivers/mysqli/mysqli_driver.php:76
+Stack trace:
+#0 /home/production/public_html/system/database/drivers/mysqli/mysqli_driver.php(91): CI_DB_mysqli_driver->db_connect()
+#1 /home/production/public_html/system/database/DB_driver.php(115): CI_DB_mysqli_driver->db_pconnect()
+#2 /home/production/public_html/system/database/DB.php(148): CI_DB_driver->initialize()
+#3 /home/production/public_html/system/core/Loader.php(346): DB()
+#4 /home/production/public_html/system/core/Loader.php(1171): CI_Loader->database()
+#5 /home/production/public_html/system/core/Loader.php(152): CI_Loader->_ci_autoloader()
+#6 /home/production/public_html/system/core/Controller.php(51): CI_Loader->initialize()
+#7 /home/production/public_html/application/controllers/auth.php(7): CI_Controller->__construct()
+#8 /home/production/public_html/system/core/CodeIgniter.php(308): Auth->__construct()
+#9 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#10 {main}
+  thrown in /home/production/public_html/system/database/drivers/mysqli/mysqli_driver.php on line 76
+[26-May-2024 13:50:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Admin::print_pdf(), 0 passed in /home/production/public_html/system/core/CodeIgniter.php on line 359 and exactly 1 expected in /home/production/public_html/application/controllers/admin.php:1014
+Stack trace:
+#0 /home/production/public_html/system/core/CodeIgniter.php(359): Admin->print_pdf()
+#1 /home/production/public_html/index.php(206): require_once('/home/productio...')
+#2 {main}
+  thrown in /home/production/public_html/application/controllers/admin.php on line 1014

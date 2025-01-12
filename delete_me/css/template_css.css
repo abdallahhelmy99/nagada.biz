@@ -1,0 +1,559 @@
+/* custom stuff */
+
+html {
+  height: 100%;
+  margin-bottom: 1px;
+}
+
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+fieldset {
+	border: 0;
+	padding: 5px 0;
+}
+
+span.pathway img {
+	margin: 0px 10px;
+}
+
+div#pathway {
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+span.pathway {
+	color: #000099;
+}
+
+
+div.componentheading {
+  padding-left: 0px;
+}
+
+a.readon {
+	margin-top: 10px;
+	line-height: 14px;
+	height: 16px;
+}
+
+/*** fonts ***/
+body {
+		font-size: 12px;
+		line-height: 130%;
+		font-family: Geneva, Tahoma, Helvetica, sans-serif;
+		color: #21252C;
+}
+
+a:link,
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+div.moduletable h3,
+.componentheading,
+#moofx a.toggle {
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	font-size: 11px;
+	padding-bottom: 5px;
+}
+
+div#side div.moduletable h3 {
+	padding-top: 10px;
+}
+
+div.bottom div.moduletable h3,
+div#side div.moduletable h3 {
+	color: #000000;
+	padding-top: 5px;
+}
+
+div#side a:hover,
+div.bottom a:hover,
+a.pathway:hover {
+	color: #fff;
+}
+
+.contentheading {
+	padding-top: 10px;
+	font-weight: normal;
+	font-family: Geneva, Tahoma, sans-serif;
+	font-size: 22px;
+}
+
+/* default menu link styles */
+a.mainlevel {
+	display: block;
+	margin-bottom: 3px;
+	padding: 3px 0px;
+}
+
+a.sublevel {
+
+}
+
+a.mainlevel:hover {
+	text-decoration: none;
+}
+
+a.sublevel:hover {
+	text-decoration: none;
+}
+
+/* headings */
+
+h1 {
+	
+}
+
+h2 {
+
+}
+
+h3 { 
+	margin: 0;
+}
+
+h4 {
+	
+}
+
+.small {
+	font-size: 10px;
+	color: #666;
+	font-weight: normal;
+}
+
+.modifydate {
+	height: 20px;
+	vertical-align: bottom;
+	font-size: 10px;
+	color: #666;
+	font-weight: normal;
+}
+
+.createdate {
+	height: 20px;
+	vertical-align: top;
+	font-size: 10px;
+	color: #666;
+	font-weight: normal;
+	vertical-align: top;
+	padding-bottom: 5px;
+	padding-top: 0px;
+}
+
+div#footer {
+	height: 40px;
+	line-height: 40px;
+	font-size: 11px;
+	text-align: center;
+}
+
+/** some joomla class stuff */
+
+table.contenttoc {
+  margin: 5px;
+  padding: 5px;
+}
+
+table.contenttoc td {
+  padding: 0 5px;
+}
+
+
+td.buttonheading {
+	
+}
+
+td.sectiontableheader {
+  font-weight: bold;
+  padding: 4px;
+  border-right: 1px solid #fff;
+}
+
+tr.sectiontableentry1 td, tr.sectiontableentry2 td {
+  padding: 4px;
+}
+
+td.sectiontableentry1, td.sectiontableentry2{
+  padding: 3px;
+}
+
+table.contentpaneopen, table.contentpane {
+  width: 100%;
+}
+
+div.moduletable ul {
+	margin: 5px 0;
+	padding: 0 2em;
+}
+
+div.moduletable ul li {
+	padding-bottom: 3px;
+}
+
+.clr {
+	clear: both;
+}
+
+#page_bg {
+	height: 100%; 
+	padding: 0;
+	margin-bottom: 1px;
+}
+
+div.mosimage {
+  margin: 5px;
+}
+
+div.mosimage_caption {
+  font-size: 10px;
+  color: #666;
+}
+
+table.adminform textarea {
+  width: auto;
+  font-size: 1em;
+  color: #666;
+}
+
+
+/** template layout stuff **/
+
+div#wrapper {
+	margin: 0 auto;
+	position: relative;
+}
+
+body.wide div#wrapper {
+	width: 980px;
+}
+
+body.thin div#wrapper {
+	width: 750px;
+}
+
+div#shadow_l {
+}
+
+div#shadow_r {
+	padding: 0 18px;
+}
+
+div#side {
+	width: 224px;	
+}
+
+body.left div#side {
+	float: left;
+}
+
+body.right div#side {
+	float: right;
+}
+
+div#side_l {
+}
+
+div#side_r {
+	padding: 0 8px;
+}
+
+div#main {
+	margin: 0;
+	padding: 0;
+}
+
+body.left div#main {
+	margin-left: 224px;		
+}
+
+body.right div#main {
+	margin-right: 224px;	
+}
+
+div#header {
+	height: 100px;
+}
+
+div#logo {
+	height: 120px;
+}
+
+body.left div#moofx {
+	float: left;	
+}
+
+body.right div#moofx {
+	float: right;	
+}
+
+div#moofx {
+
+	width: 150px;
+}
+
+body.left div.mainbody {
+	margin: 0;
+	margin-right: 5px;
+}
+
+body.right div.mainbody {
+	margin: 0;
+	margin-left: 5px;	
+}
+
+body.left div.mainbody.thin {
+	margin-left: 152px;
+}
+
+body.left div.mainbody.wide {
+	margin-left: 5px;
+}
+
+body.right div.mainbody.thin {
+	margin-right: 152px;
+}
+
+body.right div.mainbody.wide {
+	margin-right: 5px;
+}
+
+body.left div.float_module {
+	float: right;
+}
+
+body.right div.float_module {
+	float: left;
+}
+
+div.columns_3 div.float_module {
+	width: 33%;
+}
+
+div.columns_2 div.float_module {
+	width: 50%;
+}
+
+div.columns_1 div.float_module {
+	width: 100%;
+}
+
+body.left div.bodyposition {
+	clear: right;
+}
+
+body.right div.bodyposition {
+	clear: left;
+}
+
+div.bodypadding {
+	padding: 10px;
+}
+
+div.moduletable {
+	padding: 5px;
+	border: 0px solid #f00;
+}
+
+div.moduletable-chat {
+	padding-top:10px;
+	padding-left: 40px;
+}
+div.pagedivider {
+	height: 7px;
+}
+
+body.left div.pagedivider {
+	clear: right;
+}
+
+body.right div.pagedivider {
+	clear: left;
+}
+
+div#bottomsection {
+	padding-top: 5px;
+	width: 100%;
+}
+
+body.left div#bottomsection,
+body.left div.bottom {
+	float: left;
+}
+
+div.bottom {
+	width: 100%;
+}
+
+body.right div#bottomsection,
+body.right div.bottom {
+	float: left;
+}
+
+/* moofx styling */
+
+body.left #moofx div.module {
+	padding-left: 2px;
+}
+
+body.right #moofx div.module {
+	padding-right: 2px;
+}
+
+
+#moofx a.toggle {
+	display: block;
+	cursor: pointer;
+	padding: 3px;
+	padding-left: 16px;
+	margin-bottom: 2px;
+}
+
+#moofx div.stretcher {
+}
+
+#moofx div.padding{
+	padding: 5px 0;
+}
+
+/*****************************
+ ****   supersuckerfish   ****
+ *****************************/
+
+#nav {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	height: 62px;
+	padding-left: 5px;
+}
+
+#nav li {
+	margin: 0;
+	margin-top: 3px;
+	float: left;
+	display: block;
+	padding-left: 2px;
+}
+
+#nav li ul {
+	display: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 33px;
+	height: 25px;
+	left: 0;
+	width: 100%;
+}
+
+body.wide #nav li ul {
+	width: 714px;
+}
+
+body.thin #nav li ul {
+	width: 484px;
+}
+
+#nav a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#nav li.on ul {
+	display: block;
+}
+
+#nav li:hover ul, #nav li.over ul {
+	display: block;
+	z-index: 6000;
+}
+
+#nav li a {
+	display: block;
+	float: left;
+	padding: 0 15px; /*Controls tab widths*/
+	height: 30px;
+	line-height: 30px;
+}
+
+#nav li:hover a, 
+#nav li.over a {
+	background-position: 0px -30px;
+}
+
+#nav li.on a, 
+#nav li.on:hover a,
+#nav li.over.on a {
+	background-position: 0px -60px;
+}
+
+/* sub level links */
+
+#nav ul li {
+	border-right: 0;
+	padding: 3px 0;
+}
+
+
+
+#nav li ul a, #nav li.on ul a {
+	display: block;
+	float: left;
+	padding: 0 15px;
+	background: none;
+	height: 10px;
+	line-height: 10px;
+}
+
+/* some page content things */
+
+.hide {
+	display: none;
+}
+
+form {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+table.blog span.article_seperator {
+	display: block;
+	height: 20px;
+}
+
+table.nopad {
+	width: 100%;
+	border-collapse: collapse;
+	padding: 0;
+	margin: 0;
+}
+table.nopad td {
+	padding: 5px;
+}
+
+body.contentpane {
+	background: #fff;
+}
+
+table.pollstableborder td {
+	text-align: left;
+	padding: 2px 0;
+}

@@ -1,0 +1,55 @@
+/* CSS Document */
+
+body.vmax div#wrapper {
+}
+
+body.left #shadow_l {
+	float: left;
+}
+
+body.left #shadow_r {
+	float: left;
+}
+
+
+body.left #frame {
+	width: 100%;
+	float: left;
+	top: 0;
+}
+
+body.left #divnav {
+	float: left;
+	width: 100%;
+}
+
+body.left .bodyposition {
+	float: left;
+	width: 100%;
+}
+
+body.right #shadow_l {
+	float: right;
+}
+
+body.right #shadow_r {
+	float: right;
+}
+
+
+body.right #frame {
+	width: 100%;
+	float: right;
+	top: 0;
+}
+
+body.right #divnav {
+	float: right;
+	width: 100%;
+}
+
+body.right .bodyposition {
+	float: right;
+	width: 100%;
+}
+
