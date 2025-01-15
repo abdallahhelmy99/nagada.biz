@@ -52,8 +52,6 @@ $dotenv->load();
 $active_group = 'default';
 $active_record = TRUE;
 
-// $db['default']['hostname'] = 'mysql4.hostica.com';
-// $db['default']['hostname'] = 's769.use1.mysecurecloudhost.com';
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = $_ENV['DB_USERNAME'];
 $db['default']['password'] = $_ENV['DB_PASSWORD'];
