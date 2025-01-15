@@ -51,3 +51,6 @@ yarn.lock
 # Ignore build artifacts
 /build/
 dist/
+
+deploy-dev.nagada.biz.sh
+deploy.php
