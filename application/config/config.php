@@ -1,5 +1,9 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv->load();
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -14,8 +18,8 @@
 | path to your installation.
 |
 */
-$config['base_url']    = 'https://www.dev.nagada.biz/';
-
+// $config['base_url']    = 'https://www.dev.nagada.biz/';
+$config['base_url'] = $_ENV['APP_URL'] ?? 'https://www.dev.nagada.biz/';
 /*
 |--------------------------------------------------------------------------
 | Index File
