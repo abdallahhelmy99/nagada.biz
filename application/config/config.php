@@ -1,7 +1,5 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->load();
 /*
