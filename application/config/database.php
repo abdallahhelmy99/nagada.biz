@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -55,7 +55,7 @@ $db['default']['hostname'] = 'localhost';
 // $db['default']['password'] = 'SuToNM6+t7hg';
 $db['default']['username'] = 'production_abdallah';
 $db['default']['password'] = 'abdallah2002';
-$db['default']['database'] = 'Product_order';
+$db['default']['database'] = 'production_dev_Product_order';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
