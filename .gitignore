@@ -54,3 +54,5 @@ dist/
 
 deploy-dev.nagada.biz.sh
 deploy.php
+deploy.php~
+error_log
