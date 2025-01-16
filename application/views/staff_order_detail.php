@@ -77,7 +77,7 @@
 				</div>
 			</div>
 
-			<!-- ABDELRADY - QR Code API -->
+			<!-- ABDALLAH - QR Code API -->
 			<br>
 			<div class="row" style="padding-left: 15px;">
 				<button type="button" id="show-qr" class="btn btn-default">Show QR Code</button>
@@ -102,7 +102,7 @@
 						$qrname = 'qrcodes/' . $order_id . '.png';
 						file_put_contents($qrname, $qrcode_image);
 					}
-					echo '<img src="/qrcodes/"' . $qrName . '">';
+					echo '<img src="/heliopress/qrcodes/' . $qrName . '">';
 
 					?>
 
@@ -120,7 +120,7 @@
 					</script>
 				</div>
 			</div>
-			<!-- ABDELRADY - QR Code API -->
+			<!-- ABDALLAH - QR Code API -->
 
 			<br />
 
@@ -134,9 +134,9 @@
 							<th width="140">File Name</th>
 							<th width="60">Width</th>
 							<th width="60">Height</th>
-							<!-- ABDELRADY - W/H Table Header -->
+							<!-- ABDALLAH - W/H Table Header -->
 							<th width="60">Ratio</th>
-							<!-- ABDELRADY - W/H Table Header -->
+							<!-- ABDALLAH - W/H Table Header -->
 							<th width="50">Qty</th>
 							<th width="80">m<sup>2</sup></th>
 							<th>Material</th>
@@ -151,7 +151,7 @@
 					</thead>
 					<tbody>
 						<?php
-						// ABDELRADY - Sorting
+						// ABDALLAH - Sorting
 						$rows = [];
 						for ($i = 0; $i < count($filename); $i++) {
 							$row = array(
@@ -199,7 +199,7 @@
 								<td><input type="text" class="form-control input-sm min-pad" name="notes[<?php echo $row['index']; ?>]" value="<?php echo $row['notes']; ?>"></td>
 							</tr>
 						<?php }
-						// ABDELRADY - Sorting
+						// ABDALLAH - Sorting
 						?>
 
 					</tbody>
