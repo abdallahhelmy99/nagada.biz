@@ -22,12 +22,12 @@ class Client extends CI_Controller
 			redirect('auth/login', 'refresh');
 		}
 
-		// ABDALLAH - Disable Cache
+		// ABDELRADY - Disable Cache
 		// $this->output->set_header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
 		// $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
 		// $this->output->set_header('Cache-Control: post-check=0, pre-check=0');
 		// $this->output->set_header('Pragma: no-cache');
-		// ABDALLAH - Disable Cache
+		// ABDELRADY - Disable Cache
 	}
 
 	function index()
@@ -122,18 +122,18 @@ class Client extends CI_Controller
 				'id'    => 'contact_email',
 				'type'  => 'text',
 				'value' => '',
-				// ABDALLAH - Email is not required
+				// ABDELRADY - Email is not required
 				// 'value' => $this->form_validation->set_value('contact_email'),
-				// ABDALLAH - Email is not required
+				// ABDELRADY - Email is not required
 			);
 			$this->data['contact_mobile'] = array(
 				'name'  => 'contact_mobile',
 				'id'    => 'contact_mobile',
 				'type'  => 'text',
 				'value' => '',
-				// ABDALLAH - Phone Number is not required
+				// ABDELRADY - Phone Number is not required
 				// 'value' => $this->form_validation->set_value('contact_mobile'),
-				// ABDALLAH - Phone Number is not required
+				// ABDELRADY - Phone Number is not required
 			);
 			$this->data['date_delivery'] = array(
 				'name'  => 'date_delivery',
@@ -558,23 +558,23 @@ class Client extends CI_Controller
 						$data['lamination'][]	= $data_row->detail_lamination;
 						$data['quality'][]		= $data_row->detail_quality;
 						$data['finishing'][]	= $data_row->detail_finishing;
-						// ABDALLAH - Clear prices after creating a copy from an old order.
+						// ABDELRADY - Clear prices after creating a copy from an old order.
 						$data['up'][]			= 0;
 						$data['extra'][]		= 0;
 						$data['total'][]		= 0;
-						// ABDALLAH - Clear prices after creating a copy from an old order.
+						// ABDELRADY - Clear prices after creating a copy from an old order.
 						$total					= ($m2 * $data_row->detail_up) + $data_row->detail_extra;
 						$data['notes'][]		= $data_row->detail_notes;
 						$data['grand_qty']		= $data['grand_qty'] + $data_row->detail_quantity;
 						$data['grand_size']		= $data['grand_size'] + $m2;
-						// ABDALLAH - Clear prices after creating a copy from an old order.
+						// ABDELRADY - Clear prices after creating a copy from an old order.
 						$data['grand_cost']		= 0;
-						// ABDALLAH - Clear prices after creating a copy from an old order.
+						// ABDELRADY - Clear prices after creating a copy from an old order.
 					}
 					$data['grand_size']			= round($data['grand_size'], 2);
-					// ABDALLAH - Clear prices after creating a copy from an old order.
+					// ABDELRADY - Clear prices after creating a copy from an old order.
 					$data['grand_cost']			= 0;
-					// ABDALLAH - Clear prices after creating a copy from an old order.
+					// ABDELRADY - Clear prices after creating a copy from an old order.
 				}
 
 
