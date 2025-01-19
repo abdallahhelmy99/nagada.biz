@@ -77,7 +77,7 @@
 				</div>
 			</div>
 
-			<!-- ABDALLAH - QR Code API -->
+			<!-- ABDELRADY - QR Code API -->
 			<br>
 			<div class="row" style="padding-left: 15px;">
 				<button type="button" id="show-qr" class="btn btn-default">Show QR Code</button>
@@ -120,7 +120,7 @@
 					</script>
 				</div>
 			</div>
-			<!-- ABDALLAH - QR Code API -->
+			<!-- ABDELRADY - QR Code API -->
 
 			<br />
 
@@ -134,9 +134,9 @@
 							<th width="140">File Name</th>
 							<th width="60">Width</th>
 							<th width="60">Height</th>
-							<!-- ABDALLAH - W/H Table Header -->
+							<!-- ABDELRADY - W/H Table Header -->
 							<th width="60">Ratio</th>
-							<!-- ABDALLAH - W/H Table Header -->
+							<!-- ABDELRADY - W/H Table Header -->
 							<th width="50">Qty</th>
 							<th width="80">m<sup>2</sup></th>
 							<th>Material</th>
@@ -151,7 +151,7 @@
 					</thead>
 					<tbody>
 						<?php
-						// ABDALLAH - Sorting
+						// ABDELRADY - Sorting
 						$rows = [];
 						for ($i = 0; $i < count($filename); $i++) {
 							$row = array(
@@ -199,7 +199,7 @@
 								<td><input type="text" class="form-control input-sm min-pad" name="notes[<?php echo $row['index']; ?>]" value="<?php echo $row['notes']; ?>"></td>
 							</tr>
 						<?php }
-						// ABDALLAH - Sorting
+						// ABDELRADY - Sorting
 						?>
 
 					</tbody>

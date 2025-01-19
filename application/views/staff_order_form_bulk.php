@@ -69,9 +69,9 @@
 						<th width="310" class="text-center">File Name</th>
 						<th width="80" class="text-center">W</th>
 						<th width="80" class="text-center">H</th>
-						<!-- ABDALLAH -->
+						<!-- ABDELRADY -->
 						<th width="80" class="text-center">Ratio</th>
-						<!-- ABDALLAH -->
+						<!-- ABDELRADY -->
 						<th width="80" class="text-center">Qty</th>
 						<th width="80" class="text-center">m<sup>2</sup></th>
 						<th width="130" class="text-center">Material</th>
