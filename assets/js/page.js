@@ -1,31 +1,32 @@
-$(function() {
-		 
+$(function () {
+
 
 	$(' .typeahead ').typeahead({
 		hint: true,
 		highlight: true,
 		minLength: 2
 	},
-	{
-		name: 'client_name',
-		displayKey: 'value',
-		source: function(query, process) {
-			return $.ajax({
-				url: $(' .typeahead ').attr('data-link'),
-				type: 'post',
-				data: {query: query},
-				dataType: 'json',
-				success: function(json) {
-					return typeof json.options == 'undefined' ? false : process(json.options);
-				}
-			});
-		}
-	});
+		{
+			name: 'client_name',
+			displayKey: 'value',
+			source: function (query, process) {
+				return $.ajax({
+					url: $(' .typeahead ').attr('data-link'),
+					type: 'post',
+					data: { query: query },
+					dataType: 'json',
+					success: function (json) {
+						return typeof json.options == 'undefined' ? false : process(json.options);
+					}
+				});
+			}
+		});
 
 
 	$(' #btnSearch ')
-		.click(function( event ) {
-//			$(" tbody ").html('<tr><td colspan="12">Empty</td></tr>');
+		.click(function (event) {
+			event.preventDefault();
+			//			$(" tbody ").html('<tr><td colspan="12">Empty</td></tr>');
 			var par = $(this).parent().parent();
 			var p_url = $(this).attr("data-url");
 			var l_url = $(this).attr("data-view-url");
@@ -43,8 +44,8 @@ $(function() {
 			$.ajax({
 				type: "post",
 				url: p_url,
-				data: { 
-					ref: s_ref, 
+				data: {
+					ref: s_ref,
 					job: s_job,
 					lpo: s_lpo,
 					ord: s_ord,
@@ -56,55 +57,73 @@ $(function() {
 				},
 				dataType: "html"
 			})
-			.done(function( html ) {
-				//~ $(" tbody ").html('<tr><td colspan="12">'+ html +'</td></tr>');
-				$(" tbody ").html( html );
-				$(" input[type=checkbox], input[type=radio] ").iCheck({
-					checkboxClass: 'icheckbox_minimal-green',
-					radioClass: 'iradio_minimal-green'});
-				
-				$(" .page-links ").hide();
-					
-				//~ var s_query = "s-ref-"+s_ref+"/s-job-"+s_job+"/s-lpo-"+s_lpo+"/s-ord-"+s_ord+"/s-exd-"+s_exd+"/s-ctt-"+s_ctt+"/s-art-"+s_art+"/s-fnm-"+s_fnm+"/s-qty-"+s_qty+"/s-sts-"+s_sts;
-				var s_query = "s-ref-"+s_ref+"/s-job-"+s_job+"/s-lpo-"+s_lpo+"/s-ord-"+s_ord+"/s-exd-"+s_exd+"/s-ctt-"+s_ctt+"/s-cnn-"+s_cnn+"/s-art-"+s_art+"/s-sts-"+s_sts;
-				
-				console.log(s_query);
-				$(" .sort-link").each(function(){
-					this.href = l_url + '/' + s_query;
+				.done(function (html) {
+					//~ $(" tbody ").html('<tr><td colspan="12">'+ html +'</td></tr>');
+					$(" tbody ").html(html);
+					$(" input[type=checkbox], input[type=radio] ").iCheck({
+						checkboxClass: 'icheckbox_minimal-green',
+						radioClass: 'iradio_minimal-green'
+					});
+
+					$(" .page-links ").hide();
+
+					//~ var s_query = "s-ref-"+s_ref+"/s-job-"+s_job+"/s-lpo-"+s_lpo+"/s-ord-"+s_ord+"/s-exd-"+s_exd+"/s-ctt-"+s_ctt+"/s-art-"+s_art+"/s-fnm-"+s_fnm+"/s-qty-"+s_qty+"/s-sts-"+s_sts;
+					var s_query = "s-ref-" + s_ref + "/s-job-" + s_job + "/s-lpo-" + s_lpo + "/s-ord-" + s_ord + "/s-exd-" + s_exd + "/s-ctt-" + s_ctt + "/s-cnn-" + s_cnn + "/s-art-" + s_art + "/s-sts-" + s_sts;
+
+					console.log(s_query);
+					$(" .sort-link").each(function () {
+						this.href = l_url + '/' + s_query;
+					});
 				});
-			});
-	});
+		});
 
 	$(' .loaded ').attr("title", iso8601(new Date())).timeago();
-	$(" .btnRefresh ").bind("click", refreshPage).click(function(event) {
+	$(" .btnRefresh ").bind("click", refreshPage).click(function (event) {
 		event.preventDefault();
 	});
-	$(" #add_row ").bind("click", AddRow).click(function(event) {
+	
+	// ABDALLAH - Enter button fix
+	$(" #add_row ").on("click", function(event) {
+		AddRow();
 		event.preventDefault();
 	});
 	$(" .btnDeleteRow ").bind("click", DeleteRow);
-	$(" .btnArchive ").bind("click", ArchiveOrder).click(function(event) {
+	$(" .admin_order_form ").on('keydown', function(e) {
+		if(e.keyCode == 13) {
+		  	e.preventDefault();
+		}
+	});
+	$(" .client_order_form ").on('keydown', function(e) {
+		if(e.keyCode == 13) {
+		  	e.preventDefault();
+		}
+	});
+	// ABDALLAH - Enter button fix
+
+	$(" .btnArchive ").bind("click", ArchiveOrder).click(function (event) {
 		event.preventDefault();
 	});
-	$(" .btnUnArchive ").bind("click", UnArchiveOrder).click(function(event) {
+	$(" .btnUnArchive ").bind("click", UnArchiveOrder).click(function (event) {
 		event.preventDefault();
 	});
-	$(" .btnUpdateStatus ").bind("click", UpdateStatus).click(function(event) {
+	$(" .btnUpdateStatus ").bind("click", UpdateStatus).click(function (event) {
 		event.preventDefault();
 	});
-	$(" .btnUpdatePayment ").bind("click", UpdatePayment).click(function(event) {
+	$(" .btnUpdatePayment ").bind("click", UpdatePayment).click(function (event) {
 		event.preventDefault();
 	});
-	
-	$(" #AddRowTemplate ").bind("click", AddRowTemplate).click(function(event) {
+
+	$(" #AddRowTemplate ").bind("click", AddRowTemplate).click(function (event) {
 		event.preventDefault();
 	});
-	
-	$(" #SaveTemplate ").bind("click", SaveTemplate).click(function(event) {
+
+	$(" #SaveTemplate ").bind("click", SaveTemplate).click(function (event) {
 		event.preventDefault();
+		SaveTemplate();
+		console.log("SaveTemplate");
 	});
-	
-	$(" #date_delivery " ).datepicker();
+
+	$(" #date_delivery ").datepicker();
 	$(" #order_tbl ").on("change", 'input[name^="width"], input[name^="height"], input[name^="qty"]', function (event) {
 		calculateSize($(this).closest("tr"));
 		calculateGrandQty();
@@ -119,41 +138,53 @@ $(function() {
 
 	$(" input[type=checkbox], input[type=radio] ").iCheck({
 		checkboxClass: 'icheckbox_minimal-green',
-		radioClass: 'iradio_minimal-green'});
-	
-	$(" .btnAddUser" )
-		.click(function( event ) {
-		window.location.replace('add_user');
+		radioClass: 'iradio_minimal-green'
 	});
-	$(" .btnAddMaterial" )
-		.click(function( event ) {
-		window.location.replace('add_material');
-	});
-	$(" .btnAddLamination" )
-		.click(function( event ) {
-		window.location.replace('add_lamination');
-	});
-	$(" .btnAddQuality" )
-		.click(function( event ) {
-		window.location.replace('add_quality');
-	});
-	$(" .btnAddFinishing" )
-		.click(function( event ) {
-		window.location.replace('add_finishing');
-	});
-	
-	
+
+	$(" .btnAddUser")
+		.click(function (event) {
+			window.location.replace('add_user');
+		});
+	$(" .btnAddMaterial")
+		.click(function (event) {
+			window.location.replace('add_material');
+		});
+	$(" .btnAddLamination")
+		.click(function (event) {
+			window.location.replace('add_lamination');
+		});
+	$(" .btnAddQuality")
+		.click(function (event) {
+			window.location.replace('add_quality');
+		});
+	$(" .btnAddFinishing")
+		.click(function (event) {
+			window.location.replace('add_finishing');
+		});
+
+
 
 	$(" #client_order_form ").validate({
-		highlight: function(element, errorClass, validClass) {
+		highlight: function (element, errorClass, validClass) {
 			$(element).parent().addClass('has-error');
 		},
-		unhighlight: function(element, errorClass, validClass) {
+		unhighlight: function (element, errorClass, validClass) {
 			$(element).parent().removeClass('has-error').addClass('has-success');
-		}	
-	});	
+		}
+	});
 
-	
+	// ABDALLAH - Admin form validation
+	$(" #admin_order_form ").validate({
+		highlight: function (element, errorClass, validClass) {
+			$(element).parent().addClass('has-error');
+		},
+		unhighlight: function (element, errorClass, validClass) {
+			$(element).parent().removeClass('has-error').addClass('has-success');
+		}
+	});
+	// ABDALLAH - Admin form validation
+
+
 });
 
 function calculateSize(row) {
@@ -194,38 +225,45 @@ function calculateGrandCost() {
 	$("#grand_cost").text(grandCost.toFixed(2));
 }
 
+
 function refreshRowNumber() {
 	$(' .order_row ').each(function (i) {
 		$("td:first", this).html(i + 1);
-		$(this).find("input[name^='filename']").attr('name', 'filename['+i+']');
-		$(this).find("input[name^='width']").attr('name', 'width['+i+']');
-		$(this).find("input[name^='height']").attr('name', 'height['+i+']');
-		$(this).find("input[name^='qty']").attr('name', 'qty['+i+']');
-		$(this).find("select[name^='material']").attr('name', 'material['+i+']');
-		$(this).find("select[name^='lamination']").attr('name', 'lamination['+i+']');
-		$(this).find("select[name^='quality']").attr('name', 'quality['+i+']');
-		$(this).find("select[name^='finishing']").attr('name', 'finishing['+i+']');
-		$(this).find("input[name^='up']").attr('name', 'up['+i+']');
-		$(this).find("input[name^='extra']").attr('name', 'extra['+i+']');
-		$(this).find("input[name^='notes']").attr('name', 'notes['+i+']');
-	});	
+		$(this).find("input[name^='filename']").attr('name', 'filename[' + i + ']');
+		$(this).find("input[name^='width']").attr('name', 'width[' + i + ']');
+		$(this).find("input[name^='height']").attr('name', 'height[' + i + ']');
+		$(this).find("input[name^='qty']").attr('name', 'qty[' + i + ']');
+		$(this).find("select[name^='material']").attr('name', 'material[' + i + ']');
+		$(this).find("select[name^='lamination']").attr('name', 'lamination[' + i + ']');
+		$(this).find("select[name^='quality']").attr('name', 'quality[' + i + ']');
+		$(this).find("select[name^='finishing']").attr('name', 'finishing[' + i + ']');
+		$(this).find("input[name^='up']").attr('name', 'up[' + i + ']');
+		$(this).find("input[name^='extra']").attr('name', 'extra[' + i + ']');
+		$(this).find("input[name^='notes']").attr('name', 'notes[' + i + ']');
+	});
 }
 
-function AddRow(){
-	var master_row = "<tr class='order_row'>" + $(" tr.master ").html() +"</tr>";
+
+function AddRow() {
+	var master_row = "<tr class='order_row'>" + $(" tr.master ").html() + "</tr>";
 	var new_row = $.parseHTML(master_row);
 	$(new_row).find(" input ").val("");
+	// ABDALLAH - Default values for new row
+	$(new_row).find("input[name^='up']").val("0");
+	$(new_row).find("input[name^='extra']").val("0");
+	// ABDALLAH - Default values for new row
 	$(new_row).find(" option ").removeAttr("selected");
 	$(new_row).find(" button ").removeClass("hidden");
 	$("#order_tbl tbody").append(new_row);
-	$(" .btnDeleteRow ").bind("click", DeleteRow);
+	$(" .btnDeleteRow ").bind("click", DeleteRow);	
 	calculateGrandQty();
 	calculateGrandSize();
 	calculateGrandCost();
 	refreshRowNumber();
 }
 
-function DeleteRow(){
+
+function DeleteRow() {
 	var par = $(this).parent().parent(); //tr
 	par.remove();
 	calculateGrandQty();
@@ -234,7 +272,7 @@ function DeleteRow(){
 	refreshRowNumber();
 };
 
-function UpdateStatus(){
+function UpdateStatus() {
 	var par = $(this).parent().parent(); //tr
 	var o_url = par.find(" input[name='url'] ").val();
 	var o_id = par.find(" input[name='order_id'] ").val();
@@ -249,65 +287,64 @@ function UpdateStatus(){
 	$.ajax({
 		type: "post",
 		url: o_url,
-		data: { 
-			order_id: o_id, 
-			user_id: o_uid, 
-			start: o_start, 
-			print: o_print, 
-			laminate: o_laminate, 
-			process: o_process, 
-			check: o_check, 
-			ready: o_ready, 
+		data: {
+			order_id: o_id,
+			user_id: o_uid,
+			start: o_start,
+			print: o_print,
+			laminate: o_laminate,
+			process: o_process,
+			check: o_check,
+			ready: o_ready,
 			deliver: o_deliver
 		},
 		dataType: "text"
 	})
-	.done(function( text ) {
+		.done(function (text) {
 
-		switch ( text )
-		{
-		case "1":
-			par.find(" option[name='opt_process_hold'] ").prop( "selected", false ).prop( "disabled", true );
-			par.find(" option[name='opt_process_start'] ").prop( "selected", true );
-			par.find(" option[name='opt_process_print'] ").prop( "disabled", false );
-			break;
-		case "2":
-			par.find(" option[name='opt_process_start'] ").prop( "selected", false ).prop( "disabled", true );
-			par.find(" option[name='opt_process_print'] ").prop( "selected", true );
-			par.find(" option[name='opt_process_laminate'] ").prop( "disabled", false );
-			break;
-		case "3":
-			par.find(" option[name='opt_process_print'] ").prop( "selected", false ).prop( "disabled", true );
-			par.find(" option[name='opt_process_laminate'] ").prop( "selected", true );
-			par.find(" option[name='opt_process_process'] ").prop( "disabled", false );
-			break;
-		case "4":
-			par.find(" option[name='opt_process_laminate'] ").prop( "selected", false ).prop( "disabled", true );
-			par.find(" option[name='opt_process_process'] ").prop( "selected", true );
-			par.find(" option[name='opt_process_check'] ").prop( "disabled", false );
-			break;
-		case "5":
-			par.find(" option[name='opt_process_process'] ").prop( "selected", false ).prop( "disabled", true );
-			par.find(" option[name='opt_process_check'] ").prop( "selected", true );
-			par.find(" option[name='opt_process_ready'] ").prop( "disabled", false );
-			break;
-		case "6":
-			par.find(" option[name='opt_process_check'] ").prop( "selected", false ).prop( "disabled", true );
-			par.find(" option[name='opt_process_ready'] ").prop( "selected", true );
-			par.find(" option[name='opt_process_deliver'] ").prop( "disabled", false );
-			break;
-		case "7":
-			par.find(" option[name='opt_process_ready'] ").prop( "selected", false ).prop( "disabled", true );
-			par.find(" option[name='opt_process_deliver'] ").prop( "selected", true ).prop( "disabled", true );
-			par.find(" td[class='order_status'] ").empty();
-			par.find(" .btnUpdateStatus ").hide();
-			break;
-		}
-	
-	});
+			switch (text) {
+				case "1":
+					par.find(" option[name='opt_process_hold'] ").prop("selected", false).prop("disabled", true);
+					par.find(" option[name='opt_process_start'] ").prop("selected", true);
+					par.find(" option[name='opt_process_print'] ").prop("disabled", false);
+					break;
+				case "2":
+					par.find(" option[name='opt_process_start'] ").prop("selected", false).prop("disabled", true);
+					par.find(" option[name='opt_process_print'] ").prop("selected", true);
+					par.find(" option[name='opt_process_laminate'] ").prop("disabled", false);
+					break;
+				case "3":
+					par.find(" option[name='opt_process_print'] ").prop("selected", false).prop("disabled", true);
+					par.find(" option[name='opt_process_laminate'] ").prop("selected", true);
+					par.find(" option[name='opt_process_process'] ").prop("disabled", false);
+					break;
+				case "4":
+					par.find(" option[name='opt_process_laminate'] ").prop("selected", false).prop("disabled", true);
+					par.find(" option[name='opt_process_process'] ").prop("selected", true);
+					par.find(" option[name='opt_process_check'] ").prop("disabled", false);
+					break;
+				case "5":
+					par.find(" option[name='opt_process_process'] ").prop("selected", false).prop("disabled", true);
+					par.find(" option[name='opt_process_check'] ").prop("selected", true);
+					par.find(" option[name='opt_process_ready'] ").prop("disabled", false);
+					break;
+				case "6":
+					par.find(" option[name='opt_process_check'] ").prop("selected", false).prop("disabled", true);
+					par.find(" option[name='opt_process_ready'] ").prop("selected", true);
+					par.find(" option[name='opt_process_deliver'] ").prop("disabled", false);
+					break;
+				case "7":
+					par.find(" option[name='opt_process_ready'] ").prop("selected", false).prop("disabled", true);
+					par.find(" option[name='opt_process_deliver'] ").prop("selected", true).prop("disabled", true);
+					par.find(" td[class='order_status'] ").empty();
+					par.find(" .btnUpdateStatus ").hide();
+					break;
+			}
+
+		});
 };
-	
-function UpdatePayment(){
+
+function UpdatePayment() {
 	var par = $(this).parent().parent(); //tr
 	var o_url = par.find(" input[name='url'] ").val();
 	var o_id = par.find(" input[name='order_id'] ").val();
@@ -317,63 +354,63 @@ function UpdatePayment(){
 	$.ajax({
 		type: "post",
 		url: o_url,
-		data: { 
-			order_id: o_id, 
-			invoiced: o_invoiced, 
-			partial: o_partial, 
+		data: {
+			order_id: o_id,
+			invoiced: o_invoiced,
+			partial: o_partial,
 			full: o_full
 		},
 		dataType: "text"
 	})
-	.done(function( text ) {
-		alert("Payment updated!");
-	});
+		.done(function (text) {
+			alert("Payment updated!");
+		});
 
 };
 
-function ArchiveOrder(){
+function ArchiveOrder() {
 	var par = $(this).parent().parent(); //tr
 	var o_url = par.find(" input[name='archive'] ").val();
 	var o_id = par.find(" input[name='order_id'] ").val();
 	$.ajax({
 		type: "post",
 		url: o_url,
-		data: { 
-			order_id: o_id 
+		data: {
+			order_id: o_id
 		},
 		dataType: "text"
 	})
-	.done(function( text ) {
-		refreshPage();
-		// alert("Order Archived!");
-	});
+		.done(function (text) {
+			refreshPage();
+			// alert("Order Archived!");
+		});
 };
 
-function UnArchiveOrder(){
+function UnArchiveOrder() {
 	var par = $(this).parent().parent(); //tr
 	var o_url = par.find(" input[name='archive'] ").val();
 	var o_id = par.find(" input[name='order_id'] ").val();
 	$.ajax({
 		type: "post",
 		url: o_url,
-		data: { 
-			order_id: o_id 
+		data: {
+			order_id: o_id
 		},
 		dataType: "text"
 	})
-	.done(function( text ) {
-		refreshPage();
-		// alert("Order Archived!");
-	});
+		.done(function (text) {
+			refreshPage();
+			// alert("Order Archived!");
+		});
 };
 
-function refreshPage(){
+function refreshPage() {
 	location.reload();
 }
 
 
-function AddRowTemplate(){
-	var master_row = "<tr class='input_row'>" + $(" tr.master ").html() +"</tr>";
+function AddRowTemplate() {
+	var master_row = "<tr class='input_row'>" + $(" tr.master ").html() + "</tr>";
 	var new_row = $.parseHTML(master_row);
 	$(new_row).find(" input ").val("");
 	$(new_row).find(" option ").removeAttr("selected");
@@ -387,38 +424,65 @@ function AddRowTemplate(){
 function refreshRowNumberTemplate() {
 	$(' .input_row:not(:hidden) ').each(function (i) {
 		$(" td:first ", this).html(i + 1);
-		$(this).find("input[name^='filename']").attr('name', 'filename['+i+']');
-		$(this).find("input[name^='width']").attr('name', 'width['+i+']');
-		$(this).find("input[name^='height']").attr('name', 'height['+i+']');
-		$(this).find("input[name^='quantity']").attr('name', 'quantity['+i+']');
-		$(this).find("select[name^='material']").attr('name', 'material['+i+']');
-		$(this).find("select[name^='lamination']").attr('name', 'lamination['+i+']');
-		$(this).find("select[name^='quality']").attr('name', 'quality['+i+']');
-		$(this).find("select[name^='finishing']").attr('name', 'finishing['+i+']');
+		$(this).find("input[name^='filename']").attr('name', 'filename[' + i + ']');
+		$(this).find("input[name^='width']").attr('name', 'width[' + i + ']');
+		$(this).find("input[name^='height']").attr('name', 'height[' + i + ']');
+		$(this).find("input[name^='quantity']").attr('name', 'quantity[' + i + ']');
+		$(this).find("select[name^='material']").attr('name', 'material[' + i + ']');
+		$(this).find("select[name^='lamination']").attr('name', 'lamination[' + i + ']');
+		$(this).find("select[name^='quality']").attr('name', 'quality[' + i + ']');
+		$(this).find("select[name^='finishing']").attr('name', 'finishing[' + i + ']');
+		$(this).find("select[name^='username']").attr('name', 'username[' + i + ']');
 		//~ $(this).find("input[name^='up']").attr('name', 'up['+i+']');
 		//~ $(this).find("input[name^='extra']").attr('name', 'extra['+i+']');
 		//~ $(this).find("input[name^='notes']").attr('name', 'notes['+i+']');
-	});	
+	});
 }
 
 function SaveTemplate() {
 	var template = [];
 	$(' .input_row:not(:hidden) ').each(function (i) {
-		
-		template.push({ 
-		"filename"	: $(this).find("input[name^='filename']").val(),
-		"width"		: $(this).find("input[name^='width']").val(),
-		"height"	: $(this).find("input[name^='height']").val(), 
-		"quantity"	: $(this).find("input[name^='quantity']").val(), 
-		"material"	: $(this).find("select[name^='material']").val(), 
-		"lamination"	: $(this).find("select[name^='lamination']").val(), 
-		"quality"	: $(this).find("select[name^='quality']").val(), 
-		"finishing"	: $(this).find("select[name^='finishing']").val()
+
+		template.push({
+			"filename": $(this).find("input[name^='filename']").val(),
+			"width": $(this).find("input[name^='width']").val(),
+			"height": $(this).find("input[name^='height']").val(),
+			"quantity": $(this).find("input[name^='quantity']").val(),
+			"material": $(this).find("select[name^='material']").val(),
+			"lamination": $(this).find("select[name^='lamination']").val(),
+			"quality": $(this).find("select[name^='quality']").val(),
+			"finishing": $(this).find("select[name^='finishing']").val(),
+			"username": $(this).find("select[name^='username'] option:selected").text(),
 		});
-		
+
 		$(this).find("input").prop('disabled', true);
 		$(this).find("select").prop('disabled', true);
-		
+
+	});
+	$(' input[name="post_data"] ').val(JSON.stringify(template));
+	console.log(template);
+	$(' #admin_template_form ').submit();
+}
+
+function changeUserTemplate(){
+	var template = [];
+	$(' .input_row:not(:hidden) ').each(function (i) {
+
+		template.push({
+			"filename": $(this).find("input[name^='filename']").val(),
+			"width": $(this).find("input[name^='width']").val(),
+			"height": $(this).find("input[name^='height']").val(),
+			"quantity": $(this).find("input[name^='quantity']").val(),
+			"material": $(this).find("select[name^='material']").val(),
+			"lamination": $(this).find("select[name^='lamination']").val(),
+			"quality": $(this).find("select[name^='quality']").val(),
+			"finishing": $(this).find("select[name^='finishing']").val(),
+			"username": $(this).find("select[name^='username'] option:selected").text(),
+		});
+
+		$(this).find("input").prop('disabled', true);
+		$(this).find("select").prop('disabled', true);
+
 	});
 	$(' input[name="post_data"] ').val(JSON.stringify(template));
 	console.log(template);

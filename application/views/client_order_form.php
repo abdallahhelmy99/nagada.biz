@@ -103,10 +103,10 @@
 							echo form_dropdown('finishing[]', $options_finishing, '', 'class="form-control input-sm myselect" required="required"');
 							?>
 						</td>
-						<!-- ABDALLAH - Default value 0 when creating order -->
+						<!-- ABDELRADY - Default value 0 when creating order -->
 						<td><input type="text" name="up[]" class="form-control input-sm min-pad" value='0'></td>
 						<td><input type="text" name="extra[]" class="form-control input-sm min-pad" value='0'></td>
-						<!-- ABDALLAH - Default value 0 when creating order -->
+						<!-- ABDELRADY - Default value 0 when creating order -->
 						<td><input type="text" name="cost[]" class="form-control input-sm min-pad" disabled="disabled"></td>
 						<td><input type="text" name="notes[]" class="form-control input-sm min-pad"></td>
 						<td>
