@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 /*
 |--------------------------------------------------------------------------
 | Enable/Disable Migrations
@@ -8,7 +8,7 @@
 | whenever you intend to do a schema migration.
 |
 */
-$config['migration_enabled'] = FALSE;
+$config['migration_enabled'] = TRUE;
 
 
 /*
@@ -21,7 +21,7 @@ $config['migration_enabled'] = FALSE;
 | be upgraded / downgraded to.
 |
 */
-$config['migration_version'] = 0;
+$config['migration_version'] = 1;
 
 
 /*
