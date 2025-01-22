@@ -80,7 +80,7 @@
 					$qrname = 'qrcodes/' . $order_id . '.png';
 					file_put_contents($qrname, $qrcode_image);
 				}
-				echo '<img src="/heliopress/qrcodes/' . $qrName . '">';
+				echo '<img src="/qrcodes/' . $qrName . '">';
 
 				?>
 

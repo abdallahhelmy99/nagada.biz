@@ -24,7 +24,7 @@ Temporary Items
 
 # Ignore Composer dependencies
 /vendor/
-
+/qrcodes/
 # Ignore environment variables
 .env
 
