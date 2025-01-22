@@ -1,6 +1,13 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
 
-class Migration_Add_sessions extends CI_Migration
+/**
+ * Class Migration_Calendar_files
+ * This is the default code for generating new tables.
+ * Both up and down must be filled out accordingly to the data needed
+ */
+
+
+class Migration_Create_sessions_table extends CI_Migration
 {
 
   public function up()
