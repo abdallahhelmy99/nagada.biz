@@ -1075,13 +1075,7 @@ class Order_model extends CI_Model
 
 	function get_template_list()
 	{
-		if ($this->ion_auth->is_admin()) {
-			$query			 	= $this->db->get($this->tables['template']);
-		} else {
-			// $query 				= $this->db->where($this->tables['template'].'.username', $this->session->userdata('username'));
-			// get all the templates where username = $this->session->userdata('username')
-			$query = $this->db->query("SELECT * FROM order_template WHERE username = '" . $this->session->userdata('username') . "'");
-		}
+		$query			 	= $this->db->get($this->tables['template']);
 		return $query->result();
 	}
 
