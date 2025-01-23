@@ -159,7 +159,7 @@
 								'filename' => $filename[$i],
 								'width' => $width[$i],
 								'height' => $height[$i],
-								'wh_ratio' => round($width[$i] / $height[$i], 2),
+								'wh_ratio' => ($height[$i] != 0) ? round($width[$i] / $height[$i], 2) : 0,
 								'qty' => $qty[$i],
 								'm2' => $m2[$i],
 								'material' => $material[$i],
