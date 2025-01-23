@@ -251,6 +251,7 @@ function AddRow() {
 	// ABDELRADY - Default values for new row
 	$(new_row).find("input[name^='up']").val("0");
 	$(new_row).find("input[name^='extra']").val("0");
+	console.log("Set up and extra to 0");
 	// ABDELRADY - Default values for new row
 	$(new_row).find(" option ").removeAttr("selected");
 	$(new_row).find(" button ").removeClass("hidden");
