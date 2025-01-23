@@ -37,7 +37,7 @@ $content = "";
 $content .= "
 <table border=\"0\" cellpadding=\"2\">
 <tr>
-<td colspan=\"8\" align=\"center\"><h1>Heliopress<br><small>Job Order Form (Ref #:" . $order_id . $lpo . ")</small></h1><br></td>
+<td colspan=\"8\" align=\"center\"><h1>Nagada<br><small>Job Order Form (Ref #:" . $order_id . $lpo . ")</small></h1><br></td>
 </tr>
 <tr>
 	<td align=\"right\" width=\"13%\"><strong>Job Name&nbsp;:</strong>
@@ -136,4 +136,4 @@ $content .= "
 $pdf->writeHTML($content, true, false, true, false, '');
 
 //Close and output PDF document
-$pdf->Output('Heliopress_Job_Order_' . $order_id . '.pdf', 'I');
+$pdf->Output('Nagada_Job_Order_' . $order_id . '.pdf', 'I');
