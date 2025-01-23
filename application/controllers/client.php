@@ -21,13 +21,6 @@ class Client extends CI_Controller
 		if (!(($this->ion_auth->in_group(3)) or ($this->ion_auth->in_group(4)))) {
 			redirect('auth/login', 'refresh');
 		}
-
-		// ABDELRADY - Disable Cache
-		$this->output->set_header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
-		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
-		$this->output->set_header('Cache-Control: post-check=0, pre-check=0');
-		$this->output->set_header('Pragma: no-cache');
-		// ABDELRADY - Disable Cache
 	}
 
 	function index()

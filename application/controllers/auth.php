@@ -18,12 +18,6 @@ class Auth extends CI_Controller
 		$this->load->database();
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-
-		$this->output->set_header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
-		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
-		$this->output->set_header('Cache-Control: post-check=0, pre-check=0');
-		$this->output->set_header('Pragma: no-cache');
-		// ABDALLAH - Disable Cache
 	}
 
 	public function index()
