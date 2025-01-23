@@ -24,6 +24,7 @@ $config['migration_enabled'] = TRUE;
 $config['migration_version'] = 0;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Migrations Path
