@@ -82,7 +82,7 @@ $(function () {
 		event.preventDefault();
 	});
 	
-	// ABDALLAH - Enter button fix
+	// ABDELRADY - Enter button fix
 	$(" #add_row ").on("click", function(event) {
 		AddRow();
 		event.preventDefault();
@@ -98,7 +98,7 @@ $(function () {
 		  	e.preventDefault();
 		}
 	});
-	// ABDALLAH - Enter button fix
+	// ABDELRADY - Enter button fix
 
 	$(" .btnArchive ").bind("click", ArchiveOrder).click(function (event) {
 		event.preventDefault();
@@ -173,7 +173,7 @@ $(function () {
 		}
 	});
 
-	// ABDALLAH - Admin form validation
+	// ABDELRADY - Admin form validation
 	$(" #admin_order_form ").validate({
 		highlight: function (element, errorClass, validClass) {
 			$(element).parent().addClass('has-error');
@@ -182,7 +182,7 @@ $(function () {
 			$(element).parent().removeClass('has-error').addClass('has-success');
 		}
 	});
-	// ABDALLAH - Admin form validation
+	// ABDELRADY - Admin form validation
 
 
 });
@@ -248,10 +248,10 @@ function AddRow() {
 	var master_row = "<tr class='order_row'>" + $(" tr.master ").html() + "</tr>";
 	var new_row = $.parseHTML(master_row);
 	$(new_row).find(" input ").val("");
-	// ABDALLAH - Default values for new row
+	// ABDELRADY - Default values for new row
 	$(new_row).find("input[name^='up']").val("0");
 	$(new_row).find("input[name^='extra']").val("0");
-	// ABDALLAH - Default values for new row
+	// ABDELRADY - Default values for new row
 	$(new_row).find(" option ").removeAttr("selected");
 	$(new_row).find(" button ").removeClass("hidden");
 	$("#order_tbl tbody").append(new_row);
