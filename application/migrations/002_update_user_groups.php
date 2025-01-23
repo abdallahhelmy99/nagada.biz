@@ -7,22 +7,22 @@
  * Make sure, that type and constraint are filled out, else it will not work.
  */
 
-// class Migration_update_user_groups extends CI_Migration
-// {
-//     public function up() {
+class Migration_update_user_groups extends CI_Migration
+{
+    public function up()
+    {
 
-//         $this->db->query("UPDATE `users_groups` 
-//                           SET `group_id` = 4
-//                           WHERE `group_id` = 3;");
-      
-//     }
-      
-      
-//     public function down() {
-      
-//         $this->db->query("UPDATE `user_groups`  
-//                           SET `group_id` = 3
-//                           WHERE `group_id` = 4;");
-      
-//     }
-// }
+        $this->db->query("UPDATE `users_groups` 
+                          SET `group_id` = 4
+                          WHERE `group_id` = 3;");
+    }
+
+
+    public function down()
+    {
+
+        $this->db->query("UPDATE `user_groups`  
+                          SET `group_id` = 3
+                          WHERE `group_id` = 4;");
+    }
+}
