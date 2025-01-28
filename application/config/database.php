@@ -1,4 +1,8 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
+
+require_once __DIR__ . '/../../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv->load();
 /*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -48,14 +52,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-// $db['default']['hostname'] = 'mysql4.hostica.com';
-// $db['default']['hostname'] = 's769.use1.mysecurecloudhost.com';
 $db['default']['hostname'] = 'localhost';
-// $db['default']['username'] = 'Product_user';
-// $db['default']['password'] = 'SuToNM6+t7hg';
-$db['default']['username'] = 'production_abdallah';
-$db['default']['password'] = 'abdallah2002';
-$db['default']['database'] = 'Product_order';
+$db['default']['username'] = $_ENV['DB_USERNAME'];
+$db['default']['password'] = $_ENV['DB_PASSWORD'];
+$db['default']['database'] = $_ENV['DB_DATABASE'];
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

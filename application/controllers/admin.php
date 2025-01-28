@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
@@ -17,11 +17,9 @@ class Admin extends CI_Controller
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
-
 		// Check if current user admin or not
-		if (!$this->ion_auth->in_group(1))
-		{
-			redirect('auth/login','refresh');
+		if (!$this->ion_auth->in_group(1)) {
+			redirect('auth/login', 'refresh');
 		}
 	}
 
@@ -29,7 +27,7 @@ class Admin extends CI_Controller
 	{
 
 
-		$valid_sort_index 	= array ("ref", "orderdate", "expdelivery", "clientname", "contact", "status");
+		$valid_sort_index 	= array("ref", "orderdate", "expdelivery", "clientname", "contact", "status");
 		$pages['per_page'] 		= $per_page	= 20;
 		$pageExtra = $this->applyFilter($this->uri->segment_array(), "admin/index", $per_page, $valid_sort_index);
 
@@ -37,7 +35,7 @@ class Admin extends CI_Controller
 		$pages["total_rows"] = $this->order_model->count_all_order("", $pageExtra["keywords"]);
 		$pages["pagenum"] = $pageExtra["page_num"];
 
-		$page				= array ($pageExtra["page_num"], $per_page, $pageExtra["sortmode"]);
+		$page				= array($pageExtra["page_num"], $per_page, $pageExtra["sortmode"]);
 		$result				= $this->order_model->get_all_order("", $page, $pageExtra["keywords"]);
 
 		$data['current_page'][0]	= "class='active'";
@@ -46,14 +44,12 @@ class Admin extends CI_Controller
 		$data['current_page'][3]	= "";
 		$data['current_page'][4]	= "";
 		$data["links"]				= FALSE;
-		if (count($result))
-		{
+		if (count($result)) {
 			$data['empty_order']		= FALSE;
 			//~ $this->pagination->initialize($pages);
 			//~ $data["links"]		= $this->pagination->create_links();
 			$data["links"]		= $this->create_pagination($pages);
-			for ($i= 0; $i< count($result); $i++)
-			{
+			for ($i = 0; $i < count($result); $i++) {
 				$data_row					= $result[$i];
 				$data['row_number'][]		= $pageExtra["page_num"] + $i + 1;
 				// $data['row_number'][]		= $this->uri->segment(3) + $i + 1;
@@ -76,10 +72,7 @@ class Admin extends CI_Controller
 				$data['payment_partial'][]	= $payment['partial'] == 1 ? "checked='checked'" : "";
 				$data['payment_full'][]		= $payment['full'] == 1 ? "checked='checked'" : "";
 			}
-
-		}
-		else
-		{
+		} else {
 			$data['empty_order']		= TRUE;
 		}
 
@@ -96,7 +89,7 @@ class Admin extends CI_Controller
 
 	function search()
 	{
-		$page				= array (0, 40, 0);
+		$page				= array(0, 40, 0);
 
 		$artwork[0]			= "";
 		$artwork[1]			= "Mail";
@@ -121,21 +114,20 @@ class Admin extends CI_Controller
 		//~ $html = "<tr><td colspan='12'>".count($search_result)."</td></tr>";
 		$html = "";
 
-		for ($i= 0; $i< count($search_result); $i++)
-		{
+		for ($i = 0; $i < count($search_result); $i++) {
 			$j 			= $i + 1;
 			$data_row 	= $search_result[$i];
 			$order_status	= $this->order_model->get_order_status($data_row->id_order);
 			$html 		.= '
 		<tr>
-			<td>'. $j .'</td>
-			<td>'. $data_row->id_order .'</td>
-			<td>'. date("d/m/Y", $data_row->order_date) .'</td>
-			<td>'. date("d/m/Y", $data_row->req_delivery_date) .'</td>
-			<td>'. $data_row->username .'</td>
-			<td>'. $data_row->contact_name .'</td>
-			<td>'. $this->order_model->get_order_cost($data_row->id_order) .'</td>
-			<td>'. $order_status .'</td>';
+			<td>' . $j . '</td>
+			<td>' . anchor('admin/order_detail/' . $data_row->id_order, $data_row->id_order) . '</td>
+			<td>' . date("d/m/Y", $data_row->order_date) . '</td>
+			<td>' . date("d/m/Y", $data_row->req_delivery_date) . '</td>
+			<td>' . $data_row->username . '</td>
+			<td>' . $data_row->contact_name . '</td>
+			<td>' . $this->order_model->get_order_cost($data_row->id_order) . '</td>
+			<td>' . anchor('admin/order_detail/' . $data_row->id_order, $order_status) . '</td>';
 
 			$payment			= $this->order_model->get_payment_status($data_row->id_order);
 			$payment_invoiced	= $payment['invoiced'] == 1 ? "checked='checked'" : "";
@@ -145,35 +137,31 @@ class Admin extends CI_Controller
 			$html 		.= '
 			<td class="order_status">
 			<div class="checkbox mycheckbox">
-				<label><input type="checkbox" name="cb_invoiced" '. $payment_invoiced .'>Invoiced</label>
+				<label><input type="checkbox" name="cb_invoiced" ' . $payment_invoiced . '>Invoiced</label>
 			</div>
 			</td>
 			<td>
 			<div class="checkbox mycheckbox">
-				<label><input type="checkbox" name="cb_partial" '. $payment_partial .'>P.P.</label>
+				<label><input type="checkbox" name="cb_partial" ' . $payment_partial . '>P.P.</label>
 			</div>
 			</td>
 			<td>
 			<div class="checkbox mycheckbox">
-				<label><input type="checkbox" name="cb_full" '. $payment_full .'>F.P.</label>
+				<label><input type="checkbox" name="cb_full" ' . $payment_full . '>F.P.</label>
 			</div>
 			</td>
 			<td>
-			<input type="hidden" name="order_id" value="'. $data_row->id_order .'">
-			<input type="hidden" name="url" value="'. base_url() .'admin/update_order_payment" />
-			<input type="hidden" name="archive" value="'. base_url() .'admin/archive_order" />
+			<input type="hidden" name="order_id" value="' . $data_row->id_order . '">
+			<input type="hidden" name="url" value="' . base_url() . 'admin/update_order_payment" />
+			<input type="hidden" name="archive" value="' . base_url() . 'admin/archive_order" />
 			<button class="btn btn-default btn-sm btnUpdatePayment">Update</button>
-			'. anchor('/admin/print_pdf/'. $data_row->id_order, 'Print', 'role="button" class="lnkPrint btn btn-default btn-sm" target="new"') .'
+			' . anchor('/admin/print_pdf/' . $data_row->id_order, 'Print', 'role="button" class="lnkPrint btn btn-default btn-sm" target="new"') . '
 			<button class="btn btn-default btn-sm btnArchive">Archive</button>
 			</td>
 		</tr>';
-
 		}
 
 		echo $html;
-
-
-
 	}
 
 
@@ -181,7 +169,7 @@ class Admin extends CI_Controller
 	function archive()
 	{
 
-		$valid_sort_index 	= array ("ref", "orderdate", "expdelivery", "clientname", "contact", "status");
+		$valid_sort_index 	= array("ref", "orderdate", "expdelivery", "clientname", "contact", "status");
 		$pages['per_page'] 		= $per_page	= 20;
 		$pageExtra = $this->applyFilter($this->uri->segment_array(), "admin/archive", $per_page, $valid_sort_index);
 
@@ -189,7 +177,7 @@ class Admin extends CI_Controller
 		$pages["total_rows"] = $this->order_model->count_all_order("", $pageExtra["keywords"], TRUE);
 		$pages["pagenum"] = $pageExtra["page_num"];
 
-		$page				= array ($pageExtra["page_num"], $per_page, $pageExtra["sortmode"]);
+		$page				= array($pageExtra["page_num"], $per_page, $pageExtra["sortmode"]);
 		$result				= $this->order_model->get_all_order("", $page, $pageExtra["keywords"], TRUE);
 
 
@@ -206,12 +194,10 @@ class Admin extends CI_Controller
 		$data['current_page'][3]	= "class='active'";
 		$data['current_page'][4]	= "";
 		$data["links"]				= FALSE;
-		if (count($result))
-		{
+		if (count($result)) {
 			$data['empty_order']		= FALSE;
 			$data["links"]		= $this->create_pagination($pages);
-			for ($i= 0; $i< count($result); $i++)
-			{
+			for ($i = 0; $i < count($result); $i++) {
 				$data_row					= $result[$i];
 				$data['row_number'][]		= $pageExtra["page_num"] + $i + 1;
 				$data['order_id'][]			= $data_row->id_order;
@@ -233,10 +219,7 @@ class Admin extends CI_Controller
 				$data['payment_partial'][]	= $payment['partial'] == 1 ? "checked='checked'" : "";
 				$data['payment_full'][]		= $payment['full'] == 1 ? "checked='checked'" : "";
 			}
-
-		}
-		else
-		{
+		} else {
 			$data['empty_order']		= TRUE;
 		}
 
@@ -256,7 +239,7 @@ class Admin extends CI_Controller
 
 	function archive_search()
 	{
-		$page				= array (0, 40, 0);
+		$page				= array(0, 40, 0);
 
 		$artwork[0]			= "";
 		$artwork[1]			= "Mail";
@@ -281,21 +264,20 @@ class Admin extends CI_Controller
 		//~ $html = "<tr><td colspan='12'>".count($search_result)."</td></tr>";
 		$html = "";
 
-		for ($i= 0; $i< count($search_result); $i++)
-		{
+		for ($i = 0; $i < count($search_result); $i++) {
 			$j 			= $i + 1;
 			$data_row 	= $search_result[$i];
 			$order_status	= $this->order_model->get_order_status($data_row->id_order);
 			$html 		.= '
 		<tr>
-			<td>'. $j .'</td>
-			<td>'. $data_row->id_order .'</td>
-			<td>'. date("d/m/Y", $data_row->order_date) .'</td>
-			<td>'. date("d/m/Y", $data_row->req_delivery_date) .'</td>
-			<td>'. $data_row->username .'</td>
-			<td>'. $data_row->contact_name .'</td>
-			<td>'. $this->order_model->get_order_cost($data_row->id_order) .'</td>
-			<td>'. $order_status .'</td>';
+			<td>' . $j . '</td>
+			<td>' . anchor('admin/order_detail/' . $data_row->id_order, $data_row->id_order) . '</td>
+			<td>' . date("d/m/Y", $data_row->order_date) . '</td>
+			<td>' . date("d/m/Y", $data_row->req_delivery_date) . '</td>
+			<td>' . $data_row->username . '</td>
+			<td>' . $data_row->contact_name . '</td>
+			<td>' . $this->order_model->get_order_cost($data_row->id_order) . '</td>
+			<td>' . anchor('admin/order_detail/' . $data_row->id_order, $order_status) . '</td>';
 
 			$payment			= $this->order_model->get_payment_status($data_row->id_order);
 			$payment_invoiced	= $payment['invoiced'] == 1 ? "checked='checked'" : "";
@@ -305,35 +287,31 @@ class Admin extends CI_Controller
 			$html 		.= '
 			<td class="order_status">
 			<div class="checkbox mycheckbox">
-				<label><input type="checkbox" name="cb_invoiced" '. $payment_invoiced .'>Invoiced</label>
+				<label><input type="checkbox" name="cb_invoiced" ' . $payment_invoiced . '>Invoiced</label>
 			</div>
 			</td>
 			<td>
 			<div class="checkbox mycheckbox">
-				<label><input type="checkbox" name="cb_partial" '. $payment_partial .'>P.P.</label>
+				<label><input type="checkbox" name="cb_partial" ' . $payment_partial . '>P.P.</label>
 			</div>
 			</td>
 			<td>
 			<div class="checkbox mycheckbox">
-				<label><input type="checkbox" name="cb_full" '. $payment_full .'>F.P.</label>
+				<label><input type="checkbox" name="cb_full" ' . $payment_full . '>F.P.</label>
 			</div>
 			</td>
 			<td>
-			<input type="hidden" name="order_id" value="'. $data_row->id_order .'">
-			<input type="hidden" name="url" value="'. base_url() .'admin/update_order_payment" />
-			<input type="hidden" name="archive" value="'. base_url() .'admin/archive_order" />
+			<input type="hidden" name="order_id" value="' . $data_row->id_order . '">
+			<input type="hidden" name="url" value="' . base_url() . 'admin/update_order_payment" />
+			<input type="hidden" name="archive" value="' . base_url() . 'admin/archive_order" />
 			<button class="btn btn-default btn-sm btnUpdatePayment">Update</button>
-			'. anchor('/admin/print_pdf/'. $data_row->id_order, 'Print', 'role="button" class="lnkPrint btn btn-default btn-sm" target="new"') .'
+			' . anchor('/admin/print_pdf/' . $data_row->id_order, 'Print', 'role="button" class="lnkPrint btn btn-default btn-sm" target="new"') . '
 			<button class="btn btn-default btn-sm btnArchive">Archive</button>
 			</td>
 		</tr>';
-
 		}
 
 		echo $html;
-
-
-
 	}
 
 
@@ -342,12 +320,10 @@ class Admin extends CI_Controller
 	{
 		// Get all groups
 		$groups = $this->ion_auth->groups(1)->result();
-		foreach($groups as $row)
-		{
+		foreach ($groups as $row) {
 			$group_description 		= $row->description;
 			$users = $this->ion_auth->users($row->id)->result();
-			foreach($users as $row_2)
-			{
+			foreach ($users as $row_2) {
 				$data["users_id"][] = $row_2->id;
 				$data["users_name"][] = $row_2->username;
 				$data["groups_name"][] = $group_description;
@@ -375,8 +351,7 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 
-		if ($this->form_validation->run() == true)
-		{
+		if ($this->form_validation->run() == true) {
 			$username 	= strtolower($this->input->post('username'));
 			$email    	= strtolower($this->input->post('email'));
 			$password 	= $this->input->post('password');
@@ -390,15 +365,12 @@ class Admin extends CI_Controller
 			);
 		}
 
-		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data, $group))
-		{
+		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data, $group)) {
 			//check to see if we are creating the user
 			//redirect them back to the admin page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
 			redirect("admin/user_list", 'refresh');
-		}
-		else
-		{
+		} else {
 			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
 			$this->data['username'] = array(
@@ -469,11 +441,9 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('username', $this->lang->line('create_user_validation_username_label'), 'required|xss_clean');
 		$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email');
 
-		if (isset($_POST) && !empty($_POST))
-		{
+		if (isset($_POST) && !empty($_POST)) {
 			// do we have a valid request?
-			if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id'))
-			{
+			if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id')) {
 				show_error($this->lang->line('error_csrf'));
 			}
 
@@ -496,29 +466,23 @@ class Admin extends CI_Controller
 				foreach ($groupData as $grp) {
 					$this->ion_auth->add_to_group($grp, $id);
 				}
-
 			}
 
 			//update the password if it was posted
-			if ($this->input->post('password'))
-			{
+			if ($this->input->post('password')) {
 				$this->form_validation->set_rules('password', $this->lang->line('edit_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 				$this->form_validation->set_rules('password_confirm', $this->lang->line('edit_user_validation_password_confirm_label'), 'required');
 
 				$data['password'] = $this->input->post('password');
 			}
 
-			if ($this->form_validation->run() === TRUE)
-			{
+			if ($this->form_validation->run() === TRUE) {
 				$this->ion_auth->update($user->id, $data);
 
 				//check to see if we are creating the user
-				if ($this->ion_auth->errors())
-				{
+				if ($this->ion_auth->errors()) {
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('message', "User Saved");
 				}
 				redirect("admin/user_list", 'refresh');
@@ -574,22 +538,18 @@ class Admin extends CI_Controller
 
 	function delete_user($id)
 	{
-		if ($this->ion_auth->delete_user($id))
-		{
+		if ($this->ion_auth->delete_user($id)) {
 			$this->session->set_flashdata('message', "User Deleted");
-		}
-		else
-		{
+		} else {
 			$this->session->set_flashdata('message', $this->ion_auth->errors());
 		}
 		redirect("admin/user_list", 'refresh');
 	}
 
-	function order_detail($order_id="")
+	function order_detail($order_id = "")
 	{
 		$order_id = (int) $order_id;
-		if ($this->order_model->get_order_list($order_id))
-		{
+		if ($this->order_model->get_order_list($order_id)) {
 			$result	= $this->order_model->get_order_list($order_id);
 			$data_row				= $result[0];
 
@@ -603,91 +563,89 @@ class Admin extends CI_Controller
 			$data['artwork_by']		= $data_row->artwork_by;
 			$data['order_status']	= $this->order_model->get_order_status($data_row->id_order);
 
-				// Validate form input
-				$this->form_validation->set_rules('contact_name', $this->lang->line('create_order_contact_name_error'), 'required|xss_clean');
+			// Validate form input
+			$this->form_validation->set_rules('contact_name', $this->lang->line('create_order_contact_name_error'), 'required|xss_clean');
 
-				if ($this->form_validation->run() == TRUE && $this->order_model->update_order_admin($order_id))
-				// if ($this->form_validation->run() == TRUE)
-				{
-					$this->session->set_flashdata('message', 'Order successfully updated');
-					redirect("admin", 'refresh');
-				}
-				else
-				{
+			if ($this->form_validation->run() == TRUE && $this->order_model->update_order_admin($order_id))
+			// if ($this->form_validation->run() == TRUE)
+			{
+				$this->session->set_flashdata('message', 'Order successfully updated');
+				redirect("admin", 'refresh');
+			} else {
 
-					$order_date				= date("m/d/Y", $data_row->order_date);
-					$order_delivery			= date("m/d/Y", $data_row->req_delivery_date);
-					$order_contact			= $data_row->contact_name;
-					$order_email			= $data_row->contact_email;
-					$order_mobile			= $data_row->contact_mobile;
-					$this->data['message'] = (validation_errors() ? validation_errors() : '');
-					$this->data['order_name'] = array(
-						'name'  => 'order_name',
-						'id'    => 'order_name',
-						'type'  => 'text',
-						'value' => $data_row->order_name,
-					);
-					$this->data['lpo'] = array(
-						'name'  => 'lpo',
-						'id'    => 'lpo',
-						'type'  => 'text',
-						'value' => $data_row->lpo,
-					);
-					$this->data['contact_name'] = array(
-						'name'  => 'contact_name',
-						'id'    => 'contact_name',
-						'type'  => 'text',
-						'value' => $order_contact,
-					);
-					$this->data['contact_email'] = array(
-						'name'  => 'contact_email',
-						'id'    => 'contact_email',
-						'type'  => 'text',
-						'value' => $order_email,
-					);
-					$this->data['contact_mobile'] = array(
-						'name'  => 'contact_mobile',
-						'id'    => 'contact_mobile',
-						'type'  => 'text',
-						'value' => $order_mobile,
-					);
-					$this->data['date_delivery'] = array(
-						'name'  => 'date_delivery',
-						'id'    => 'date_delivery',
-						'type'  => 'text',
-						'value' => $order_delivery,
-					);
+				$order_date				= date("m/d/Y", $data_row->order_date);
+				$order_delivery			= date("m/d/Y", $data_row->req_delivery_date);
+				$order_contact			= $data_row->contact_name;
+				$order_email			= $data_row->contact_email;
+				$order_mobile			= $data_row->contact_mobile;
+				$this->data['message'] = (validation_errors() ? validation_errors() : '');
+				$this->data['order_name'] = array(
+					'name'  => 'order_name',
+					'id'    => 'order_name',
+					'type'  => 'text',
+					'value' => $data_row->order_name,
+				);
+				$this->data['lpo'] = array(
+					'name'  => 'lpo',
+					'id'    => 'lpo',
+					'type'  => 'text',
+					'value' => $data_row->lpo,
+				);
+				$this->data['contact_name'] = array(
+					'name'  => 'contact_name',
+					'id'    => 'contact_name',
+					'type'  => 'text',
+					'value' => $order_contact,
+				);
+				$this->data['contact_email'] = array(
+					'name'  => 'contact_email',
+					'id'    => 'contact_email',
+					'type'  => 'text',
+					'value' => $order_email,
+				);
+				$this->data['contact_mobile'] = array(
+					'name'  => 'contact_mobile',
+					'id'    => 'contact_mobile',
+					'type'  => 'text',
+					'value' => $order_mobile,
+				);
+				$this->data['date_delivery'] = array(
+					'name'  => 'date_delivery',
+					'id'    => 'date_delivery',
+					'type'  => 'text',
+					'value' => $order_delivery,
+				);
 
 
 				$result	= $this->order_model->get_order_detail($order_id);
 				$data['grand_qty']		= 0;
 				$data['grand_size']		= 0;
 				$data['grand_cost']		= 0;
-				if (count($result))
-				{
+				if (count($result)) {
 					$data['options_material']	= $this->order_model->get_material_list();
 					$data['options_lamination']	= $this->order_model->get_lamination_list();
 					$data['options_quality']	= $this->order_model->get_quality_list();
 					$data['options_finishing']	= $this->order_model->get_finishing_list();
-					for ($i= 0; $i< count($result); $i++)
-					{
+
+					for ($i = 0; $i < count($result); $i++) {
 						$data_row				= $result[$i];
 						$data['filename'][]		= $data_row->detail_filename;
 						$data['width'][]		= $data_row->detail_width;
 						$data['height'][]		= $data_row->detail_height;
 						$data['qty'][]			= $data_row->detail_quantity;
 						$m2						= $data_row->detail_width *
-													$data_row->detail_height *
-													$data_row->detail_quantity / 10000;
+							$data_row->detail_height *
+							$data_row->detail_quantity / 10000;
 						$data['m2'][]			= round($m2, 2);
 						$data['material'][]		= $data_row->detail_material;
+						$data['materialname'][] 	= $this->order_model->get_material_name($data_row->detail_material);
 						$data['lamination'][]	= $data_row->detail_lamination;
 						$data['quality'][]		= $data_row->detail_quality;
 						$data['finishing'][]	= $data_row->detail_finishing;
 						$data['up'][]			= $data_row->detail_up;
 						$data['extra'][]		= (float) $data_row->detail_extra;
-						$data['total'][]		= round(( $m2 * $data_row->detail_up ) + $data_row->detail_extra, 2);
-						$total					= ( $m2 * $data_row->detail_up ) + $data_row->detail_extra;
+						$data['total'][]		= round(($m2 * $data_row->detail_up) + $data_row->detail_extra, 2);
+						$total					= ($m2 * $data_row->detail_up) + $data_row->detail_extra;
 						$data['notes'][]		= $data_row->detail_notes;
 						$data['grand_qty']		= $data['grand_qty'] + $data_row->detail_quantity;
 						$data['grand_size']		= $data['grand_size'] + $m2;
@@ -696,9 +654,6 @@ class Admin extends CI_Controller
 					$data['grand_size']			= round($data['grand_size'], 2);
 					$data['grand_cost']			= round($data['grand_cost'], 2);
 				}
-
-
-
 				$data['current_page'][0]	= "class='active'";
 				$data['current_page'][1]	= "";
 				$data['current_page'][2]	= "";
@@ -711,13 +666,9 @@ class Admin extends CI_Controller
 				$this->load->view('admin_order_detail', $this->data);
 				$this->load->view('footer');
 			}
-		}
-		else
-		{
+		} else {
 			$data['empty_order']		= TRUE;
 		}
-
-
 	}
 
 	function app_setting()
@@ -741,8 +692,7 @@ class Admin extends CI_Controller
 
 	function edit_material($id)
 	{
-		if ($this->input->post('id'))
-		{
+		if ($this->input->post('id')) {
 			$item_id					= (int) $this->input->post('id');
 			$value['material_name']		= trim($this->input->post('itemname'));
 			$this->order_model->update_material($item_id, $value);
@@ -754,8 +704,7 @@ class Admin extends CI_Controller
 		$data['current_page'][3]	= "";
 		$data['current_page'][4]	= "";
 		$material 				= $this->order_model->get_material_list($id);
-		foreach ($material as $key => $value)
-		{
+		foreach ($material as $key => $value) {
 			$data['item_id']	= $key;
 			$data['item_name']	= $value;
 		}
@@ -769,15 +718,12 @@ class Admin extends CI_Controller
 
 	function add_material()
 	{
-		if ($this->input->post('itemname'))
-		{
+		if ($this->input->post('itemname')) {
 			$value['material_name']		= trim($this->input->post('itemname'));
 			$this->order_model->add_material($value);
 			$this->session->set_flashdata('message', 'Material successfully added');
 			$this->app_setting();
-		}
-		else
-		{
+		} else {
 			$data['current_page'][0]	= "";
 			$data['current_page'][1]	= "";
 			$data['current_page'][2]	= "class='active'";
@@ -794,8 +740,7 @@ class Admin extends CI_Controller
 
 	function edit_lamination($id)
 	{
-		if ($this->input->post('id'))
-		{
+		if ($this->input->post('id')) {
 			$item_id					= (int) $this->input->post('id');
 			$value['lamination_name']	= trim($this->input->post('itemname'));
 			$this->order_model->update_lamination($item_id, $value);
@@ -807,8 +752,7 @@ class Admin extends CI_Controller
 		$data['current_page'][3]	= "";
 		$data['current_page'][4]	= "";
 		$lamination 				= $this->order_model->get_lamination_list($id);
-		foreach ($lamination as $key => $value)
-		{
+		foreach ($lamination as $key => $value) {
 			$data['item_id']	= $key;
 			$data['item_name']	= $value;
 		}
@@ -822,15 +766,12 @@ class Admin extends CI_Controller
 
 	function add_lamination()
 	{
-		if ($this->input->post('itemname'))
-		{
+		if ($this->input->post('itemname')) {
 			$value['lamination_name']	= trim($this->input->post('itemname'));
 			$this->order_model->add_lamination($value);
 			$this->session->set_flashdata('message', 'Lamination successfully added');
 			$this->app_setting();
-		}
-		else
-		{
+		} else {
 			$data['current_page'][0]	= "";
 			$data['current_page'][1]	= "";
 			$data['current_page'][2]	= "class='active'";
@@ -847,8 +788,7 @@ class Admin extends CI_Controller
 
 	function edit_quality($id)
 	{
-		if ($this->input->post('id'))
-		{
+		if ($this->input->post('id')) {
 			$item_id					= (int) $this->input->post('id');
 			$value['quality_name']		= trim($this->input->post('itemname'));
 			$this->order_model->update_quality($item_id, $value);
@@ -860,8 +800,7 @@ class Admin extends CI_Controller
 		$data['current_page'][3]	= "";
 		$data['current_page'][4]	= "";
 		$quality 					= $this->order_model->get_quality_list($id);
-		foreach ($quality as $key => $value)
-		{
+		foreach ($quality as $key => $value) {
 			$data['item_id']	= $key;
 			$data['item_name']	= $value;
 		}
@@ -875,15 +814,12 @@ class Admin extends CI_Controller
 
 	function add_quality()
 	{
-		if ($this->input->post('itemname'))
-		{
+		if ($this->input->post('itemname')) {
 			$value['quality_name']	= trim($this->input->post('itemname'));
 			$this->order_model->add_quality($value);
 			$this->session->set_flashdata('message', 'Lamination successfully added');
 			$this->app_setting();
-		}
-		else
-		{
+		} else {
 			$data['current_page'][0]	= "";
 			$data['current_page'][1]	= "";
 			$data['current_page'][2]	= "class='active'";
@@ -900,8 +836,7 @@ class Admin extends CI_Controller
 
 	function edit_finishing($id)
 	{
-		if ($this->input->post('id'))
-		{
+		if ($this->input->post('id')) {
 			$item_id					= (int) $this->input->post('id');
 			$value['finishing_name']	= trim($this->input->post('itemname'));
 			$this->order_model->update_finishing($item_id, $value);
@@ -913,8 +848,7 @@ class Admin extends CI_Controller
 		$data['current_page'][3]	= "";
 		$data['current_page'][4]	= "";
 		$finishing 					= $this->order_model->get_finishing_list($id);
-		foreach ($finishing as $key => $value)
-		{
+		foreach ($finishing as $key => $value) {
 			$data['item_id']	= $key;
 			$data['item_name']	= $value;
 		}
@@ -928,15 +862,12 @@ class Admin extends CI_Controller
 
 	function add_finishing()
 	{
-		if ($this->input->post('itemname'))
-		{
+		if ($this->input->post('itemname')) {
 			$value['finishing_name']	= trim($this->input->post('itemname'));
 			$this->order_model->add_finishing($value);
 			$this->session->set_flashdata('message', 'Lamination successfully added');
 			$this->app_setting();
-		}
-		else
-		{
+		} else {
 			$data['current_page'][0]	= "";
 			$data['current_page'][1]	= "";
 			$data['current_page'][2]	= "class='active'";
@@ -953,8 +884,7 @@ class Admin extends CI_Controller
 
 	function manage_template_order()
 	{
-		if ($this->input->post("post_data"))
-		{
+		if ($this->input->post("post_data")) {
 			//~ $json_input				= $this->input->post("post_data");
 			//~ $decoded_json			= json_decode($json_input);
 			//~ print_r($decoded_json);
@@ -976,6 +906,7 @@ class Admin extends CI_Controller
 		$data['options_quality']	= $this->order_model->get_quality_list();
 		$data['options_finishing']	= $this->order_model->get_finishing_list();
 		$data['message']	= $this->session->flashdata('message') ? $this->session->flashdata('message') : '';
+		$data['username']			= $this->order_model->get_clients();
 		$this->load->view('header', $data);
 		$this->load->view('admin_nav');
 		$this->load->view('admin_manage_template_order', $data);
@@ -1025,8 +956,7 @@ class Admin extends CI_Controller
 		$artwork[6]			= "USB";
 		$artwork[7]			= "Other";
 
-		if ($this->order_model->get_order_list($order_id))
-		{
+		if ($this->order_model->get_order_list($order_id)) {
 			$result	= $this->order_model->get_order_list($order_id);
 			$data_row				= $result[0];
 			$data['order_id']		= $order_id;
@@ -1040,42 +970,40 @@ class Admin extends CI_Controller
 			$data['order_mobile']	= $data_row->contact_mobile;
 			$data['artwork_by']		= $artwork[$data_row->artwork_by];
 
-				$result	= $this->order_model->get_order_detail($order_id);
-				$data['grand_qty']		= 0;
-				$data['grand_size']		= 0;
-				$data['grand_cost']		= 0;
-				if (count($result))
-				{
-					$material			= $this->order_model->get_material_list();
-					$lamination			= $this->order_model->get_lamination_list();
-					$quality			= $this->order_model->get_quality_list();
-					$finishing			= $this->order_model->get_finishing_list();
-					for ($i= 0; $i< count($result); $i++)
-					{
-						$data_row				= $result[$i];
-						$data['filename'][]		= $data_row->detail_filename;
-						$data['width'][]		= $data_row->detail_width;
-						$data['height'][]		= $data_row->detail_height;
-						$data['qty'][]			= $data_row->detail_quantity;
-						$m2						= $data_row->detail_width *
-													$data_row->detail_height *
-													$data_row->detail_quantity / 10000;
-						$data['m2'][]			= round($m2, 2);
-						$data['material'][]		= $material[$data_row->detail_material];
-						$data['lamination'][]	= $lamination[$data_row->detail_lamination];
-						$data['quality'][]		= $quality[$data_row->detail_quality];
-						$data['finishing'][]	= $finishing[$data_row->detail_finishing];
-						$data['up'][]			= $data_row->detail_up;
-						$data['extra'][]		= (float) $data_row->detail_extra;
-						$data['total'][]		= ( $m2 * $data_row->detail_up ) + $data_row->detail_extra;
-						$total					= ( $m2 * $data_row->detail_up ) + $data_row->detail_extra;
-						$data['notes'][]		= $data_row->detail_notes;
-						$data['grand_qty']		= $data['grand_qty'] + $data_row->detail_quantity;
-						$data['grand_size']		= $data['grand_size'] + $m2;
-						$data['grand_cost']		= $data['grand_cost'] + $total;
-					}
-					$data['grand_size']			= round($data['grand_size'], 2);
+			$result	= $this->order_model->get_order_detail($order_id);
+			$data['grand_qty']		= 0;
+			$data['grand_size']		= 0;
+			$data['grand_cost']		= 0;
+			if (count($result)) {
+				$material			= $this->order_model->get_material_list();
+				$lamination			= $this->order_model->get_lamination_list();
+				$quality			= $this->order_model->get_quality_list();
+				$finishing			= $this->order_model->get_finishing_list();
+				for ($i = 0; $i < count($result); $i++) {
+					$data_row				= $result[$i];
+					$data['filename'][]		= $data_row->detail_filename;
+					$data['width'][]		= $data_row->detail_width;
+					$data['height'][]		= $data_row->detail_height;
+					$data['qty'][]			= $data_row->detail_quantity;
+					$m2						= $data_row->detail_width *
+						$data_row->detail_height *
+						$data_row->detail_quantity / 10000;
+					$data['m2'][]			= round($m2, 2);
+					$data['material'][]		= $material[$data_row->detail_material];
+					$data['lamination'][]	= $lamination[$data_row->detail_lamination];
+					$data['quality'][]		= $quality[$data_row->detail_quality];
+					$data['finishing'][]	= $finishing[$data_row->detail_finishing];
+					$data['up'][]			= $data_row->detail_up;
+					$data['extra'][]		= (float) $data_row->detail_extra;
+					$data['total'][]		= ($m2 * $data_row->detail_up) + $data_row->detail_extra;
+					$total					= ($m2 * $data_row->detail_up) + $data_row->detail_extra;
+					$data['notes'][]		= $data_row->detail_notes;
+					$data['grand_qty']		= $data['grand_qty'] + $data_row->detail_quantity;
+					$data['grand_size']		= $data['grand_size'] + $m2;
+					$data['grand_cost']		= $data['grand_cost'] + $total;
 				}
+				$data['grand_size']			= round($data['grand_size'], 2);
+			}
 
 
 
@@ -1096,21 +1024,20 @@ class Admin extends CI_Controller
 
 	function _valid_csrf_nonce()
 	{
-		if ($this->input->post($this->session->flashdata('csrfkey')) !== FALSE &&
-			$this->input->post($this->session->flashdata('csrfkey')) == $this->session->flashdata('csrfvalue'))
-		{
+		if (
+			$this->input->post($this->session->flashdata('csrfkey')) !== FALSE &&
+			$this->input->post($this->session->flashdata('csrfkey')) == $this->session->flashdata('csrfvalue')
+		) {
 			return TRUE;
-		}
-		else
-		{
+		} else {
 			return FALSE;
 		}
 	}
 
-	function _render_page($view, $data=null, $render=false)
+	function _render_page($view, $data = null, $render = false)
 	{
 
-		$this->viewdata = (empty($data)) ? $this->data: $data;
+		$this->viewdata = (empty($data)) ? $this->data : $data;
 
 		$view_html = $this->load->view($view, $this->viewdata, $render);
 
@@ -1132,63 +1059,52 @@ class Admin extends CI_Controller
 
 		$output = "";
 		$current_page = (int) ($page_num + $per_page) / $per_page;
-		$num_pages = ceil ($total_rows / $per_page);
+		$num_pages = ceil($total_rows / $per_page);
 
 		// First link
-		if  ($current_page > ($num_links + 1))
-		{
-			$output .= '<a href="'.$base_url.'">'.$first_link.'</a>&nbsp;';
+		if ($current_page > ($num_links + 1)) {
+			$output .= '<a href="' . $base_url . '">' . $first_link . '</a>&nbsp;';
 		}
 
 		$start = (($current_page - $num_links) > 0) ? $current_page - ($num_links - 1) : 1;
 		$end   = (($current_page + $num_links) < $num_pages) ? $current_page + $num_links : $num_pages;
 
-		if ($num_pages > 1)
-		{
-			for ($loop = $start -1; $loop <= $end; $loop++)
-			{
+		if ($num_pages > 1) {
+			for ($loop = $start - 1; $loop <= $end; $loop++) {
 				$i = $loop;
 
-				if ($i >= 1)
-				{
-					if ($current_page == $loop)
-					{
-						$output .= '<b>'.$i.'</b>&nbsp;';
-					}
-					else
-					{
+				if ($i >= 1) {
+					if ($current_page == $loop) {
+						$output .= '<b>' . $i . '</b>&nbsp;';
+					} else {
 						$n = ($i == 1) ? '' : $i;
 
-						if ($n == '')
-						{
-							$output .= '<a href="'.$base_url.'">'.$first_link.'</a>&nbsp;';
-						}
-						else
-						{
+						if ($n == '') {
+							$output .= '<a href="' . $bfase_url . '">' . $first_link . '</a>&nbsp;';
+						} else {
 							$n = ($n == '') ? '' : $n;
-							$output .= '<a href="'.$base_url.'/p-'.$n.'">'.$n.'</a>&nbsp;';
+							$output .= '<a href="' . $base_url . '/p-' . $n . '">' . $n . '</a>&nbsp;';
 						}
 					}
 				}
 			}
-
 		}
 
-		if (($current_page + $num_links) < $num_pages)
-		{
+		if (($current_page + $num_links) < $num_pages) {
 			$i = $num_pages;
-			$output .= '<a href="'.$base_url.'/p-'.$i.'">'.$last_link.'</a>';
+			$output .= '<a href="' . $base_url . '/p-' . $i . '">' . $last_link . '</a>';
 		}
 		return $output;
 	}
 
-	function applyFilter($segs, $base_url, $per_page, $valid_sort_index) {
+	function applyFilter($segs, $base_url, $per_page, $valid_sort_index)
+	{
 		$sortmode = 0;
 		$pagenum = 0;
 		$base_url = base_url($base_url);
 		$keywords = [];
 		foreach ($segs as $segment) {
-			$parameter = explode("-",$segment);
+			$parameter = explode("-", $segment);
 			if (count($parameter) > 1) {
 				switch ($parameter[0]) {
 					case "p":
@@ -1198,13 +1114,13 @@ class Admin extends CI_Controller
 						if (in_array($parameter[1], $valid_sort_index)) {
 							$sortindex = $parameter[1];
 							$sorttype = (strtolower($parameter[2]) == "up") ? "asc" : "desc";
-							$sortmode = array ($sortindex, $sorttype);
+							$sortmode = array($sortindex, $sorttype);
 							$base_url = base_url("admin/index") . "/sort-" . $parameter[1] . "-" . $parameter[2];
 						}
 						break;
-					// Search keywords
+						// Search keywords
 					case "s":
-						if (( ! empty($parameter[2])) AND strtolower($parameter[2]) != "undefined") {
+						if ((! empty($parameter[2])) and strtolower($parameter[2]) != "undefined") {
 							$keywords[$parameter[1]] = $parameter[2];
 						}
 						break;
@@ -1218,8 +1134,6 @@ class Admin extends CI_Controller
 			"keywords" => $keywords,
 		];
 	}
-
-
 }
 
 /* End of file admin.php */

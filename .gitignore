@@ -24,7 +24,6 @@ Temporary Items
 
 # Ignore Composer dependencies
 /vendor/
-
 # Ignore environment variables
 .env
 
@@ -51,3 +50,8 @@ yarn.lock
 # Ignore build artifacts
 /build/
 dist/
+
+deploy-dev.nagada.biz.sh
+deploy.php
+deploy.php~
+error_log
