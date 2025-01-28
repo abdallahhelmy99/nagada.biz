@@ -1080,7 +1080,7 @@ class Admin extends CI_Controller
 						$n = ($i == 1) ? '' : $i;
 
 						if ($n == '') {
-							$output .= '<a href="' . $bfase_url . '">' . $first_link . '</a>&nbsp;';
+							$output .= '<a href="' . $base_url . '">' . $first_link . '</a>&nbsp;';
 						} else {
 							$n = ($n == '') ? '' : $n;
 							$output .= '<a href="' . $base_url . '/p-' . $n . '">' . $n . '</a>&nbsp;';
