@@ -186,7 +186,7 @@
 								<td><?php echo $row['filename']; ?></td>
 								<td><input type="text" class="form-control input-sm min-pad" name="width[<?php echo $row['index']; ?>]" value="<?php echo $row['width']; ?>"></td>
 								<td><input type="text" class="form-control input-sm min-pad" name="height[<?php echo $row['index']; ?>]" value="<?php echo $row['height']; ?>"></td>
-								<td><input type="text" class="form-control input-sm min-pad" name="height[<?php echo $row['index']; ?>]" value="<?php echo $row['wh_ratio']; ?>"></td>
+								<td><input type="text" class="form-control input-sm min-pad" name="wh_ratio[<?php echo $row['index']; ?>]" value="<?php echo $row['wh_ratio']; ?>"></td>
 								<td><input type="text" class="form-control input-sm min-pad" name="qty[<?php echo $row['index']; ?>]" value="<?php echo $row['qty']; ?>"></td>
 								<td><input type="text" class="form-control input-sm min-pad" name="m2[<?php echo $row['index']; ?>]" value="<?php echo $row['m2']; ?>" disabled="disabled"></td>
 								<td><?php echo $row['material']; ?></td>
