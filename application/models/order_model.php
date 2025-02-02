@@ -1,25 +1,23 @@
-<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Order_model extends CI_Model
 {
-	function __construct()
-	{
-		// Call the Model constructor
-		parent::__construct();
+    function __construct()
+    {
+        // Call the Model constructor
+        parent::__construct();
 		$this->load->database();
 		$this->load->library('ion_auth');
-		$this->tables  		= array(
-			'order' => 'order_order',
-			'users' => 'users',
-			'group' => 'users_groups',
-			'order_detail' => 'order_detail',
-			'order_contact' => 'order_contact',
-			'material' => 'list_material',
-			'lamination' => 'list_lamination',
-			'quality' => 'list_quality',
-			'finishing' => 'list_finishing',
-			'payment' => 'order_payment',
-			'template' => 'order_template'
-		);
+   		$this->tables  		= array ('order' => 'order_order',
+									'users' => 'users',
+									'group' => 'users_groups',
+									'order_detail' => 'order_detail',
+									'order_contact' => 'order_contact',
+									'material' => 'list_material',
+									'lamination' => 'list_lamination',
+									'quality' => 'list_quality',
+									'finishing' => 'list_finishing',
+									'payment' => 'order_payment',
+									'template' => 'order_template');
 	}
 
 	function client_name_exist($client_name)
@@ -29,18 +27,24 @@ class Order_model extends CI_Model
 		$this->db->like('username', $client_name, 'none');
 		$query			= $this->db->get($this->tables['users']);
 		$result 		= $query->row();
-		if ($query->num_rows() != 1) {
+		if ($query->num_rows() != 1)
+		{
 			return FALSE;
-		} else {
+		}
+		else
+		{
 			return $result->id;
 		}
 	}
 
 	function create_order()
 	{
-		if ($this->client_name_exist($this->input->post('client_name'))) {
+		if ($this->client_name_exist($this->input->post('client_name')))
+		{
 			$client_id 		= $this->client_name_exist($this->input->post('client_name'));
-		} else {
+		}
+		else
+		{
 			$client_id		= $this->ion_auth->get_user_id();
 		}
 		$order_name			= $this->input->post('order_name');
@@ -50,8 +54,8 @@ class Order_model extends CI_Model
 		$contact_email     	= $this->input->post('contact_email');
 		$contact_mobile    	= $this->input->post('contact_mobile');
 		$order_date			= time();
-		$date_delivery		= explode('/', $this->input->post('date_delivery'));
-		$req_delivery_date	= mktime(0, 0, 0, $date_delivery[0], $date_delivery[1], $date_delivery[2]);
+		$date_delivery		= explode('/',$this->input->post('date_delivery'));
+		$req_delivery_date	= mktime(0,0,0,$date_delivery[0],$date_delivery[1],$date_delivery[2]);
 
 		$data_order 		= array(
 			'order_name'		=> $order_name,
@@ -61,7 +65,7 @@ class Order_model extends CI_Model
 			'order_date'        => $order_date,
 			'req_delivery_date' => $req_delivery_date
 		);
-		$filtered_data_order	= array_map('trim', $data_order);
+		$filtered_data_order	= array_map('trim',$data_order);
 		$this->db->insert($this->tables['order'], $data_order);
 		$id_order			= $this->db->insert_id();
 
@@ -76,8 +80,10 @@ class Order_model extends CI_Model
 		$detail_up			= $this->input->post('up');
 		$detail_extra		= $this->input->post('extra');
 		$detail_notes		= $this->input->post('notes');
-		for ($i = 0; $i < count($this->input->post('filename')); $i++) {
-			if ($detail_quantity[$i] > 0) {
+		for ($i= 0; $i< count($this->input->post('filename')); $i++)
+		{
+			if ($detail_quantity[$i] > 0)
+			{
 				$data_order_detail 		= array(
 					'id_order'      	=> $id_order,
 					'detail_filename' 	=> $detail_filename[$i],
@@ -97,7 +103,8 @@ class Order_model extends CI_Model
 		}
 
 		// Get contact ID
-		if ($id_contact = $this->get_contact_detail($contact_name, $client_id, $contact_email, $contact_mobile)) {
+		if ($id_contact = $this->get_contact_detail($contact_name, $client_id, $contact_email, $contact_mobile))
+		{
 			// Update order table
 			$data_order_update 		= array(
 				'contact_id'		=> $id_contact
@@ -105,7 +112,9 @@ class Order_model extends CI_Model
 			$this->db->where('client_id', $client_id);
 			$this->db->where('id_order', $id_order);
 			$this->db->update($this->tables['order'], $data_order_update);
-		} else {
+		}
+		else
+		{
 			$data_order_contact 	= array(
 				'client_id'			=> $client_id,
 				'contact_name'      => $contact_name,
@@ -128,101 +137,125 @@ class Order_model extends CI_Model
 
 	function count_all_order($client_id = "", $keywords = "", $is_archived = FALSE)
 	{
-		$this->db->join($this->tables['order_contact'], $this->tables['order_contact'] . ".id_contact = " . $this->tables['order'] . ".contact_id", 'LEFT');
-
-		if ($client_id != "") {
-			$this->db->where($this->tables['order'] . '.client_id', $client_id);
-		} else {
-			if ($is_archived == FALSE) {
-				$this->db->where($this->tables['order'] . '.is_archived', 0);
-			} else {
-				$this->db->where($this->tables['order'] . '.is_archived', 1);
+        $this->db->join($this->tables['order_contact'], $this->tables['order_contact'].".id_contact = ".$this->tables['order'].".contact_id" , 'LEFT');
+		
+		if ($client_id != "")
+		{
+			$this->db->where($this->tables['order'].'.client_id', $client_id);
+		}
+		else
+		{
+			if ($is_archived == FALSE)
+			{
+				$this->db->where($this->tables['order'].'.is_archived', 0);
+			}
+			else
+			{
+				$this->db->where($this->tables['order'].'.is_archived', 1);
 			}
 			//~ $this->db->where($this->tables['order'].'.is_archived', 0);
-			$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['order'] . ".client_id", 'LEFT');
+			$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['order'].".client_id" , 'LEFT');
 		}
 
 
 		// This part is for search function
-		if ($keywords) {
-			if (!empty($keywords['ref'])) {
-				$this->db->like($this->tables['order'] . '.id_order', $keywords['ref']);
+		if ($keywords)
+		{
+			if (!empty($keywords['ref']))
+			{
+				$this->db->like($this->tables['order'].'.id_order', $keywords['ref']);
 			}
-			if (!empty($keywords['job'])) {
-				$this->db->like($this->tables['order'] . '.order_name', $keywords['job']);
+			if (!empty($keywords['job']))
+			{
+				$this->db->like($this->tables['order'].'.order_name', $keywords['job']);
 			}
-			if (!empty($keywords['lpo'])) {
-				$this->db->like($this->tables['order'] . '.lpo', $keywords['lpo']);
+			if (!empty($keywords['lpo']))
+			{
+				$this->db->like($this->tables['order'].'.lpo', $keywords['lpo']);
 			}
-			if (!empty($keywords['ord'])) {
-				$o_date = explode('/', $keywords['ord']);
-				if (count($o_date) == 3) {
-					if ((is_numeric($o_date[0])) and (is_numeric($o_date[1])) and (is_numeric($o_date[2]))) {
-						$k_ord0	= mktime(0, 0, 0, $o_date[1], $o_date[0], $o_date[2]);
-						$k_ord1	= mktime(23, 59, 59, $o_date[1], $o_date[0], $o_date[2]);
-						$where_clause = 'order_date BETWEEN "' . $k_ord0 . '" AND "' . $k_ord1 . '"';
+			if (!empty($keywords['ord']))
+			{
+				$o_date = explode('/',$keywords['ord']);
+				if (count($o_date) == 3)
+				{
+					if ((is_numeric($o_date[0])) AND (is_numeric($o_date[1])) AND (is_numeric($o_date[2])))
+					{
+						$k_ord0	= mktime(0,0,0,$o_date[1],$o_date[0],$o_date[2]);
+						$k_ord1	= mktime(23,59,59,$o_date[1],$o_date[0],$o_date[2]);
+						$where_clause = 'order_date BETWEEN "'.$k_ord0.'" AND "'.$k_ord1.'"';
 						$this->db->where($where_clause);
 					}
 				}
 			}
-			if (!empty($keywords['exd'])) {
-				$d_date = explode('/', $keywords['exd']);
-				if (count($d_date) == 3) {
-					if ((is_numeric($d_date[0])) and (is_numeric($d_date[1])) and (is_numeric($d_date[2]))) {
-						$k_ded0	= mktime(0, 0, 0, $d_date[1], $d_date[0], $d_date[2]);
-						$k_ded1	= mktime(23, 59, 59, $d_date[1], $d_date[0], $d_date[2]);
-						$where_clause = 'req_delivery_date BETWEEN "' . $k_ded0 . '" AND "' . $k_ded1 . '"';
+			if (!empty($keywords['exd']))
+			{
+				$d_date = explode('/',$keywords['exd']);
+				if (count($d_date) == 3)
+				{
+					if ((is_numeric($d_date[0])) AND (is_numeric($d_date[1])) AND (is_numeric($d_date[2])))
+					{
+						$k_ded0	= mktime(0,0,0,$d_date[1],$d_date[0],$d_date[2]);
+						$k_ded1	= mktime(23,59,59,$d_date[1],$d_date[0],$d_date[2]);
+						$where_clause = 'req_delivery_date BETWEEN "'.$k_ded0.'" AND "'.$k_ded1.'"';
 						$this->db->where($where_clause);
 					}
 				}
 			}
-			if (!empty($keywords['ctt'])) {
-				if ($keywords['ctt'] != 'undefined') {
-					$this->db->like($this->tables['order_contact'] . '.contact_name', $keywords['ctt']);
+			if (!empty($keywords['ctt']))
+			{
+				if ($keywords['ctt'] != 'undefined')
+				{
+					$this->db->like($this->tables['order_contact'].'.contact_name', $keywords['ctt']);
 				}
 			}
-			if (!empty($keywords['cnn'])) {
-				if ($keywords['cnn'] != 'undefined') {
-					$this->db->like($this->tables['users'] . '.username', $keywords['cnn']);
+			if (!empty($keywords['cnn']))
+			{
+				if ($keywords['cnn'] != 'undefined')
+				{
+					$this->db->like($this->tables['users'].'.username', $keywords['cnn']);
 				}
 			}
-			if (!empty($keywords['art'])) {
-				if ($keywords['art'] != 'undefined') {
-					$this->db->like($this->tables['order'] . '.artwork_by', $keywords['art']);
+			if (!empty($keywords['art']))
+			{
+				if ($keywords['art'] != 'undefined')
+				{
+					$this->db->like($this->tables['order'].'.artwork_by', $keywords['art']);
 				}
 			}
-			if (!empty($keywords['sts'])) {
-				switch ($keywords['sts']) {
+			if (!empty($keywords['sts']))
+			{
+				switch ($keywords['sts'])
+				{
 					case '0':
-						$this->db->where($this->tables['order'] . '.started_by', NULL);
+						$this->db->where($this->tables['order'].'.started_by', NULL);
 						break;
 					case '1':
-						$this->db->where($this->tables['order'] . '.started_by >', '0');
-						$this->db->where($this->tables['order'] . '.printed_by', NULL);
+						$this->db->where($this->tables['order'].'.started_by >', '0');
+						$this->db->where($this->tables['order'].'.printed_by', NULL);
 						break;
 					case '2':
-						$this->db->where($this->tables['order'] . '.printed_by >', '0');
-						$this->db->where($this->tables['order'] . '.laminated_by', NULL);
+						$this->db->where($this->tables['order'].'.printed_by >', '0');
+						$this->db->where($this->tables['order'].'.laminated_by', NULL);
 						break;
 					case '3':
-						$this->db->where($this->tables['order'] . '.laminated_by >', '0');
-						$this->db->where($this->tables['order'] . '.processed_by', NULL);
+						$this->db->where($this->tables['order'].'.laminated_by >', '0');
+						$this->db->where($this->tables['order'].'.processed_by', NULL);
 						break;
 					case '4':
-						$this->db->where($this->tables['order'] . '.processed_by >', '0');
-						$this->db->where($this->tables['order'] . '.checked_by', NULL);
+						$this->db->where($this->tables['order'].'.processed_by >', '0');
+						$this->db->where($this->tables['order'].'.checked_by', NULL);
 						break;
 					case '5':
-						$this->db->where($this->tables['order'] . '.checked_by >', '0');
-						$this->db->where($this->tables['order'] . '.ready_by', NULL);
+						$this->db->where($this->tables['order'].'.checked_by >', '0');
+						$this->db->where($this->tables['order'].'.ready_by', NULL);
 						break;
 					case '6':
-						$this->db->where($this->tables['order'] . '.ready_by >', '0');
-						$this->db->where($this->tables['order'] . '.delivered_by', NULL);
+						$this->db->where($this->tables['order'].'.ready_by >', '0');
+						$this->db->where($this->tables['order'].'.delivered_by', NULL);
 						break;
 					case '7':
 					default:
-						$this->db->where($this->tables['order'] . '.delivered_by >', '0');
+						$this->db->where($this->tables['order'].'.delivered_by >', '0');
 						break;
 				}
 			}
@@ -250,20 +283,26 @@ class Order_model extends CI_Model
 
 	function get_all_order($client_id = "", $page = "", $keywords = "", $is_archived = FALSE)
 	{
-		$this->db->join($this->tables['order_contact'], $this->tables['order_contact'] . ".id_contact = " . $this->tables['order'] . ".contact_id", 'LEFT');
+		$this->db->join($this->tables['order_contact'], $this->tables['order_contact'].".id_contact = ".$this->tables['order'].".contact_id" , 'LEFT');
 		//~ $this->db->join($this->tables['order_detail'], $this->tables['order_detail'].".id_order = ".$this->tables['order'].".id_order" , 'LEFT');
 
-		if ($client_id != "") {
-			$this->db->where($this->tables['order'] . '.client_id', $client_id);
-			$this->db->select($this->tables['order'] . '.id_order, artwork_by, order_name, lpo, order_date, req_delivery_date, contact_name, started_by IS NOT NULL as started, printed_by IS NOT NULL as printed, laminated_by IS NOT NULL as laminated, processed_by IS NOT NULL as processed, checked_by IS NOT NULL as checked, ready_by IS NOT NULL as ready, delivered_by IS NOT NULL as delivered');
-		} else {
-			if ($is_archived == FALSE) {
-				$this->db->where($this->tables['order'] . '.is_archived', 0);
-			} else {
-				$this->db->where($this->tables['order'] . '.is_archived', 1);
+		if ($client_id != "")
+		{
+			$this->db->where($this->tables['order'].'.client_id', $client_id);
+			$this->db->select($this->tables['order'].'.id_order, artwork_by, order_name, lpo, order_date, req_delivery_date, contact_name, started_by IS NOT NULL as started, printed_by IS NOT NULL as printed, laminated_by IS NOT NULL as laminated, processed_by IS NOT NULL as processed, checked_by IS NOT NULL as checked, ready_by IS NOT NULL as ready, delivered_by IS NOT NULL as delivered');
+		}
+		else
+		{
+			if ($is_archived == FALSE)
+			{
+				$this->db->where($this->tables['order'].'.is_archived', 0);
+			}
+			else
+			{
+				$this->db->where($this->tables['order'].'.is_archived', 1);
 			}
 			$this->db->select('username, id_order, order_name, lpo, artwork_by, order_date, req_delivery_date, contact_name, started_by IS NOT NULL as started, printed_by IS NOT NULL as printed, laminated_by IS NOT NULL as laminated, processed_by IS NOT NULL as processed, checked_by IS NOT NULL as checked, ready_by IS NOT NULL as ready, delivered_by IS NOT NULL as delivered');
-			$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['order'] . ".client_id", 'LEFT');
+			$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['order'].".client_id" , 'LEFT');
 		}
 
 
@@ -271,105 +310,122 @@ class Order_model extends CI_Model
 		// $query			 	= $this->db->order_by("order_date", "DESC");
 		// $query			 	= $this->db->order_by("req_delivery_date", "ASC");
 
-		$valid_sort_index = array(
-			"id_order" => "ref",
-			"order_name" => "jobname",
-			"username" => "clientname",
-			"lpo" 		=> "lpo",
-			"order_date" => "orderdate",
-			"req_delivery_date" => "expdelivery",
-			"contact_name" => "contact",
-			"artwork_by" => "artwork",
-		);
+		$valid_sort_index = array (
+									"id_order" => "ref",
+									"order_name" => "jobname",
+									"username" => "clientname",
+									"lpo" 		=> "lpo",
+									"order_date" => "orderdate",
+									"req_delivery_date" => "expdelivery",
+									"contact_name" => "contact",
+									"artwork_by" => "artwork",
+									);
 
 
 		// This part is for search function
-		if ($keywords) {
-			if (!empty($keywords['ref'])) {
+		if ($keywords)
+		{
+			if (!empty($keywords['ref']))
+			{
 				if ($keywords['ref'] != 'undefined')
-					$this->db->like($this->tables['order'] . '.id_order', $keywords['ref']);
+				$this->db->like($this->tables['order'].'.id_order', $keywords['ref']);
 			}
-			if (!empty($keywords['job'])) {
+			if (!empty($keywords['job']))
+			{
 				if ($keywords['job'] != 'undefined')
-					$this->db->like($this->tables['order'] . '.order_name', $keywords['job']);
+				$this->db->like($this->tables['order'].'.order_name', $keywords['job']);
 			}
-			if (!empty($keywords['lpo'])) {
+			if (!empty($keywords['lpo']))
+			{
 				if ($keywords['lpo'] != 'undefined')
-					$this->db->like($this->tables['order'] . '.lpo', $keywords['lpo']);
+				$this->db->like($this->tables['order'].'.lpo', $keywords['lpo']);
 			}
-			if (!empty($keywords['ord'])) {
-				$o_date = explode('/', $keywords['ord']);
-				if (count($o_date) == 3) {
-					if ((is_numeric($o_date[0])) and (is_numeric($o_date[1])) and (is_numeric($o_date[2]))) {
-						$k_ord0	= mktime(0, 0, 0, $o_date[1], $o_date[0], $o_date[2]);
-						$k_ord1	= mktime(23, 59, 59, $o_date[1], $o_date[0], $o_date[2]);
-						$where_clause = 'order_date BETWEEN "' . $k_ord0 . '" AND "' . $k_ord1 . '"';
+			if (!empty($keywords['ord']))
+			{
+				$o_date = explode('/',$keywords['ord']);
+				if (count($o_date) == 3)
+				{
+					if ((is_numeric($o_date[0])) AND (is_numeric($o_date[1])) AND (is_numeric($o_date[2])))
+					{
+						$k_ord0	= mktime(0,0,0,$o_date[1],$o_date[0],$o_date[2]);
+						$k_ord1	= mktime(23,59,59,$o_date[1],$o_date[0],$o_date[2]);
+						$where_clause = 'order_date BETWEEN "'.$k_ord0.'" AND "'.$k_ord1.'"';
 						$this->db->where($where_clause);
 					}
 				}
 			}
-			if (!empty($keywords['exd'])) {
-				$d_date = explode('/', $keywords['exd']);
-				if (count($d_date) == 3) {
-					if ((is_numeric($d_date[0])) and (is_numeric($d_date[1])) and (is_numeric($d_date[2]))) {
-						$k_ded0	= mktime(0, 0, 0, $d_date[1], $d_date[0], $d_date[2]);
-						$k_ded1	= mktime(23, 59, 59, $d_date[1], $d_date[0], $d_date[2]);
-						$where_clause = 'req_delivery_date BETWEEN "' . $k_ded0 . '" AND "' . $k_ded1 . '"';
+			if (!empty($keywords['exd']))
+			{
+				$d_date = explode('/',$keywords['exd']);
+				if (count($d_date) == 3)
+				{
+					if ((is_numeric($d_date[0])) AND (is_numeric($d_date[1])) AND (is_numeric($d_date[2])))
+					{
+						$k_ded0	= mktime(0,0,0,$d_date[1],$d_date[0],$d_date[2]);
+						$k_ded1	= mktime(23,59,59,$d_date[1],$d_date[0],$d_date[2]);
+						$where_clause = 'req_delivery_date BETWEEN "'.$k_ded0.'" AND "'.$k_ded1.'"';
 						$this->db->where($where_clause);
 					}
 				}
 			}
-			if (!empty($keywords['ctt'])) {
+			if (!empty($keywords['ctt']))
+			{
 				if ($keywords['ctt'] != 'undefined')
-					$this->db->like($this->tables['order_contact'] . '.contact_name', $keywords['ctt']);
+				$this->db->like($this->tables['order_contact'].'.contact_name', $keywords['ctt']);
 			}
-			if (!empty($keywords['cnn'])) {
+			if (!empty($keywords['cnn']))
+			{
 				if ($keywords['cnn'] != 'undefined')
-					$this->db->like($this->tables['users'] . '.username', $keywords['cnn']);
+				$this->db->like($this->tables['users'].'.username', $keywords['cnn']);
 			}
-			if (!empty($keywords['art'])) {
+			if (!empty($keywords['art']))
+			{
 				if ($keywords['art'] != 'undefined')
-					$this->db->like($this->tables['order'] . '.artwork_by', $keywords['art']);
+				$this->db->like($this->tables['order'].'.artwork_by', $keywords['art']);
 			}
-			if (!empty($keywords['fnm'])) {
+			if (!empty($keywords['fnm']))
+			{
 				//~ $this->db->like($this->tables['order_detail'].'.detail_filename', $keywords['fnm']);
 			}
-			if (!empty($keywords['qty'])) {
+			if (!empty($keywords['qty']))
+			{
 				//~ $this->db->like($this->tables['order'].'.quantity', $keywords['qty']);
 			}
-			if (!empty($keywords['sts'])) {
+			if (!empty($keywords['sts']))
+			{
 
-				switch ($keywords['sts']) {
+				switch ($keywords['sts'])
+				{
 					case 'hold':
-						$this->db->where($this->tables['order'] . '.started_by', NULL);
+						$this->db->where($this->tables['order'].'.started_by', NULL);
 						break;
 					case '1':
-						$this->db->where($this->tables['order'] . '.started_by >', '0');
-						$this->db->where($this->tables['order'] . '.printed_by', NULL);
+						$this->db->where($this->tables['order'].'.started_by >', '0');
+						$this->db->where($this->tables['order'].'.printed_by', NULL);
 						break;
 					case '2':
-						$this->db->where($this->tables['order'] . '.printed_by >', '0');
-						$this->db->where($this->tables['order'] . '.laminated_by', NULL);
+						$this->db->where($this->tables['order'].'.printed_by >', '0');
+						$this->db->where($this->tables['order'].'.laminated_by', NULL);
 						break;
 					case '3':
-						$this->db->where($this->tables['order'] . '.laminated_by >', '0');
-						$this->db->where($this->tables['order'] . '.processed_by', NULL);
+						$this->db->where($this->tables['order'].'.laminated_by >', '0');
+						$this->db->where($this->tables['order'].'.processed_by', NULL);
 						break;
 					case '4':
-						$this->db->where($this->tables['order'] . '.processed_by >', '0');
-						$this->db->where($this->tables['order'] . '.checked_by', NULL);
+						$this->db->where($this->tables['order'].'.processed_by >', '0');
+						$this->db->where($this->tables['order'].'.checked_by', NULL);
 						break;
 					case '5':
-						$this->db->where($this->tables['order'] . '.checked_by >', '0');
-						$this->db->where($this->tables['order'] . '.ready_by', NULL);
+						$this->db->where($this->tables['order'].'.checked_by >', '0');
+						$this->db->where($this->tables['order'].'.ready_by', NULL);
 						break;
 					case '6':
-						$this->db->where($this->tables['order'] . '.ready_by >', '0');
-						$this->db->where($this->tables['order'] . '.delivered_by', NULL);
+						$this->db->where($this->tables['order'].'.ready_by >', '0');
+						$this->db->where($this->tables['order'].'.delivered_by', NULL);
 						break;
 					case '7':
 					default:
-						$this->db->where($this->tables['order'] . '.delivered_by >', '0');
+						$this->db->where($this->tables['order'].'.delivered_by >', '0');
 						break;
 				}
 			}
@@ -387,12 +443,17 @@ class Order_model extends CI_Model
 
 
 		// This part is for sorting function
-		if (is_array($page)) {
-			if ((isset($page[2])) and (is_array($page[2]))) {
-				if (in_array($page[2][0], $valid_sort_index)) {
+		if (is_array($page))
+		{
+			if ((isset($page[2])) AND (is_array($page[2])))
+			{
+				if (in_array($page[2][0], $valid_sort_index))
+				{
 					$field_name		= array_keys($valid_sort_index, $page[2][0]);
 					$query			= $this->db->order_by($field_name[0], $page[2][1]);
-				} else if ($page[2][0] == "status") {
+				}
+				else if ($page[2][0] == "status")
+				{
 					$query = $this->db->order_by("started", $page[2][1]);
 					$query = $this->db->order_by("printed", $page[2][1]);
 					$query = $this->db->order_by("laminated", $page[2][1]);
@@ -400,17 +461,22 @@ class Order_model extends CI_Model
 					$query = $this->db->order_by("checked", $page[2][1]);
 					$query = $this->db->order_by("ready", $page[2][1]);
 					$query = $this->db->order_by("delivered", $page[2][1]);
-				} else {
+				}
+				else
+				{
 					$query			 = $this->db->order_by("id_order", "DESC");
 				}
-			} else {
-				$query			 	= $this->db->order_by($this->tables['order'] . ".id_order", "DESC");
+			}
+			else
+			{
+				$query			 	= $this->db->order_by($this->tables['order'].".id_order", "DESC");
 			}
 			$query			 	= $this->db->get($this->tables['order'], $page[1], $page[0]);
 		}
 
 		// Display default page
-		else {
+		else
+		{
 			$query			 	= $this->db->get($this->tables['order']);
 		}
 
@@ -419,18 +485,32 @@ class Order_model extends CI_Model
 
 		$rows			 	= $query->result();
 		return $rows;
+
+
+
+
+
+
+
+
+
+
+
 	}
 
 	function get_archive_order($client_id = "", $page = "")
 	{
-		$this->db->where($this->tables['order'] . '.is_archived', 1);
-		$this->db->join($this->tables['order_contact'], $this->tables['order_contact'] . ".id_contact = " . $this->tables['order'] . ".contact_id", 'LEFT');
-		if ($client_id != "") {
-			$this->db->where($this->tables['order'] . '.client_id', $client_id);
+		$this->db->where($this->tables['order'].'.is_archived', 1);
+		$this->db->join($this->tables['order_contact'], $this->tables['order_contact'].".id_contact = ".$this->tables['order'].".contact_id" , 'LEFT');
+		if ($client_id != "")
+		{
+			$this->db->where($this->tables['order'].'.client_id', $client_id);
 			$this->db->select('id_order, artwork_by, order_name, lpo, order_date, req_delivery_date, contact_name');
-		} else {
+		}
+		else
+		{
 			$this->db->select('username, id_order, order_name, lpo, artwork_by, order_date, req_delivery_date, contact_name');
-			$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['order'] . ".client_id", 'LEFT');
+			$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['order'].".client_id" , 'LEFT');
 		}
 
 
@@ -438,22 +518,31 @@ class Order_model extends CI_Model
 		$query			 	= $this->db->order_by("id_order", "DESC");
 		// $query			 	= $this->db->order_by("order_date", "DESC");
 		// $query			 	= $this->db->order_by("req_delivery_date", "ASC");
-		if (!empty($page)) {
+		if (!empty($page))
+		{
 			$query			 	= $this->db->get($this->tables['order'], $page[1], $page[0]);
-		} else {
+		}
+		else
+		{
 			$query			 	= $this->db->get($this->tables['order']);
 		}
 		$rows			 	= $query->result();
 		return $rows;
+
+
+
+
+
+
 	}
 
 
 	function get_order_list($order_id)
 	{
-		$this->db->select('id_order, ' . $this->tables['order'] . '.client_id, username, order_name, lpo, artwork_by, order_date, req_delivery_date, contact_name, contact_email, contact_mobile');
-		$this->db->join($this->tables['order_contact'], $this->tables['order_contact'] . ".id_contact = " . $this->tables['order'] . ".contact_id", 'LEFT');
-		$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['order'] . ".client_id", 'LEFT');
-		$this->db->where($this->tables['order'] . '.id_order', $order_id);
+		$this->db->select('id_order, '.$this->tables['order'].'.client_id, username, order_name, lpo, artwork_by, order_date, req_delivery_date, contact_name, contact_email, contact_mobile');
+		$this->db->join($this->tables['order_contact'], $this->tables['order_contact'].".id_contact = ".$this->tables['order'].".contact_id" , 'LEFT');
+		$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['order'].".client_id" , 'LEFT');
+		$this->db->where($this->tables['order'].'.id_order', $order_id);
 		$query			 	= $this->db->get($this->tables['order']);
 		$rows			 	= $query->result();
 
@@ -469,9 +558,12 @@ class Order_model extends CI_Model
 		$this->db->like('contact_mobile', $contact_mobile);
 		$query			= $this->db->get($this->tables['order_contact']);
 		$result 		= $query->row();
-		if ($query->num_rows() < 1) {
+		if ($query->num_rows() < 1)
+		{
 			return FALSE;
-		} else {
+		}
+		else
+		{
 			return $result->id_contact;
 		}
 	}
@@ -481,48 +573,19 @@ class Order_model extends CI_Model
 		//SELECT user_id, username FROM `users_groups` LEFT JOIN users ON users.id = users_groups.user_id WHERE group_id = '3'
 		$this->db->select('user_id, username');
 		$this->db->like('username', $input_query);
-		$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['group'] . ".user_id", 'LEFT');
+		$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['group'].".user_id" , 'LEFT');
 		$query			= $this->db->get($this->tables['group']);
-		$this->db->where($this->tables['group'] . '.group_id', '3');
+		$this->db->where($this->tables['group'].'.group_id', '3');
 		$result 		= $query->result();
-		if ($query->num_rows() < 1) {
+		if ($query->num_rows() < 1)
+		{
 			return FALSE;
-		} else {
+		}
+		else
+		{
 			return $result;
 		}
 	}
-
-	function get_clients()
-	{
-
-		$this->db->select('users.username')
-			->from('users')
-			->join('users_groups', 'users.id = users_groups.user_id');
-
-		$this->db->where('users_groups.group_id', 4);
-		// $this->db->where_in($this->tables['group'].'.group_id', array('3', '4'));	// 3 = Client, 4 = Major Client
-
-		$query = $this->db->get();
-
-		$usernames = array_column($query->result_array(), 'username');
-
-		return $usernames;
-	}
-
-	// function get_clients() {
-
-	// 	$this->db->select('users.id, users.username')
-	// 	  ->from('users')
-	// 	  ->join('users_groups', 'users.id = users_groups.user_id');
-
-	// 	$this->db->where('users_groups.group_id', 3);
-
-	// 	$query = $this->db->get();
-
-	// 	// Return array with id and username
-	// 	return $query->result_array(); 
-
-	//   }
 
 	function get_order_status($order_id, $return = "")
 	{
@@ -531,7 +594,8 @@ class Order_model extends CI_Model
 		$query			 	= $this->db->get($this->tables['order']);
 		$rows			 	= $query->result();
 
-		if ($return == "") {
+		if ($return == "")
+		{
 			$result			= $rows[0];
 			$data			= (empty($result->started_by) ? "Hold" : "Started");
 			$data			= (empty($result->printed_by) ? $data : "Printed");
@@ -540,16 +604,17 @@ class Order_model extends CI_Model
 			$data			= (empty($result->checked_by) ? $data : "Checked");
 			$data			= (empty($result->ready_by) ? $data : "Ready");
 			$data			= (empty($result->delivered_by) ? $data : "Delivered");
-		} else if ($return == "array") {
+		}
+		else if ($return == "array")
+		{
 			$result				= $rows[0];
-			$data = array((empty($result->started_by) ? 0 : 1),
-				((!empty($result->printed_by) or (empty($result->started_by))) ? 1 : 0),
-				((!empty($result->laminated_by) or (empty($result->printed_by))) ? 1 : 0),
-				((!empty($result->processed_by) or (empty($result->laminated_by))) ? 1 : 0),
-				((!empty($result->checked_by) or (empty($result->processed_by))) ? 1 : 0),
-				((!empty($result->ready_by) or (empty($result->checked_by))) ? 1 : 0),
-				((!empty($result->delivered_by) or (empty($result->ready_by))) ? 1 : 0)
-			);
+			$data = array ((empty($result->started_by) ? 0 : 1),
+							((!empty($result->printed_by) OR (empty($result->started_by))) ? 1 : 0),
+							((!empty($result->laminated_by) OR (empty($result->printed_by))) ? 1 : 0),
+							((!empty($result->processed_by) OR (empty($result->laminated_by))) ? 1 : 0),
+							((!empty($result->checked_by) OR (empty($result->processed_by))) ? 1 : 0),
+							((!empty($result->ready_by) OR (empty($result->checked_by))) ? 1 : 0),
+							((!empty($result->delivered_by) OR (empty($result->ready_by))) ? 1 : 0));
 		}
 		return $data;
 	}
@@ -561,11 +626,13 @@ class Order_model extends CI_Model
 		$query			 	= $this->db->get($this->tables['order_detail']);
 		$rows			 	= $query->result();
 		$filename			= array();
-		for ($i = 0; $i < count($rows); $i++) {
+		for ($i= 0; $i< count($rows); $i++)
+		{
 			$result				= $rows[$i];
 			$filename[]			= $result->detail_filename;
 		}
 		return $filename;
+
 	}
 
 	function get_order_quantity($order_id)
@@ -575,11 +642,13 @@ class Order_model extends CI_Model
 		$query			 	= $this->db->get($this->tables['order_detail']);
 		$rows			 	= $query->result();
 		$quantity			= array();
-		for ($i = 0; $i < count($rows); $i++) {
+		for ($i= 0; $i< count($rows); $i++)
+		{
 			$result				= $rows[$i];
 			$quantity[]			= $result->detail_quantity;
 		}
 		return $quantity;
+
 	}
 
 	function get_order_cost($order_id)
@@ -589,11 +658,13 @@ class Order_model extends CI_Model
 		$query			 	= $this->db->get($this->tables['order_detail']);
 		$rows			 	= $query->result();
 		$total				= 0;
-		for ($i = 0; $i < count($rows); $i++) {
+		for ($i= 0; $i< count($rows); $i++)
+		{
 			$result				= $rows[$i];
-			$total				= (($result->detail_width * $result->detail_height * $result->detail_quantity / 10000) * $result->detail_up) + $total + $result->detail_extra;
+			$total				= (( $result->detail_width * $result->detail_height * $result->detail_quantity / 10000) * $result->detail_up ) + $total + $result->detail_extra;
 		}
 		return $total;
+
 	}
 
 	function get_order_detail($order_id)
@@ -603,17 +674,18 @@ class Order_model extends CI_Model
 		$query			 	= $this->db->get($this->tables['order_detail']);
 		$rows			 	= $query->result();
 		return $rows;
+
 	}
 
 	function get_user_start($order_id)
 	{
 		$this->db->select('started_by, username');
 		$this->db->where('id_order', $order_id);
-		$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['order'] . ".started_by", 'LEFT');
+		$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['order'].".started_by" , 'LEFT');
 		$query			 	= $this->db->get($this->tables['order']);
 		$rows			 	= $query->result();
 		$result				= $rows[0];
-		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not started yet</span>" : "<span class=\"text-success\">Started by " . $result->username . "</span>");
+		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not started yet</span>" : "<span class=\"text-success\">Started by ".$result->username. "</span>");
 		return $status;
 	}
 
@@ -621,11 +693,11 @@ class Order_model extends CI_Model
 	{
 		$this->db->select('printed_by, username');
 		$this->db->where('id_order', $order_id);
-		$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['order'] . ".printed_by", 'LEFT');
+		$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['order'].".printed_by" , 'LEFT');
 		$query			 	= $this->db->get($this->tables['order']);
 		$rows			 	= $query->result();
 		$result				= $rows[0];
-		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not printed yet</span>" : "<span class=\"text-success\">Printed by " . $result->username . "</span>");
+		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not printed yet</span>" : "<span class=\"text-success\">Printed by ".$result->username. "</span>");
 		return $status;
 	}
 
@@ -633,11 +705,11 @@ class Order_model extends CI_Model
 	{
 		$this->db->select('laminated_by, username');
 		$this->db->where('id_order', $order_id);
-		$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['order'] . ".laminated_by", 'LEFT');
+		$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['order'].".laminated_by" , 'LEFT');
 		$query			 	= $this->db->get($this->tables['order']);
 		$rows			 	= $query->result();
 		$result				= $rows[0];
-		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not laminated yet</span>" : "<span class=\"text-success\">Laminated by " . $result->username . "</span>");
+		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not laminated yet</span>" : "<span class=\"text-success\">Laminated by ".$result->username. "</span>");
 		return $status;
 	}
 
@@ -645,11 +717,11 @@ class Order_model extends CI_Model
 	{
 		$this->db->select('processed_by, username');
 		$this->db->where('id_order', $order_id);
-		$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['order'] . ".processed_by", 'LEFT');
+		$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['order'].".processed_by" , 'LEFT');
 		$query			 	= $this->db->get($this->tables['order']);
 		$rows			 	= $query->result();
 		$result				= $rows[0];
-		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not processed yet</span>" : "<span class=\"text-success\">Processed by " . $result->username . "</span>");
+		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not processed yet</span>" : "<span class=\"text-success\">Processed by ".$result->username. "</span>");
 		return $status;
 	}
 
@@ -657,11 +729,11 @@ class Order_model extends CI_Model
 	{
 		$this->db->select('checked_by, username');
 		$this->db->where('id_order', $order_id);
-		$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['order'] . ".checked_by", 'LEFT');
+		$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['order'].".checked_by" , 'LEFT');
 		$query			 	= $this->db->get($this->tables['order']);
 		$rows			 	= $query->result();
 		$result				= $rows[0];
-		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not checked yet</span>" : "<span class=\"text-success\">Checked by " . $result->username . "</span>");
+		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not checked yet</span>" : "<span class=\"text-success\">Checked by ".$result->username. "</span>");
 		return $status;
 	}
 
@@ -669,11 +741,11 @@ class Order_model extends CI_Model
 	{
 		$this->db->select('ready_by, username');
 		$this->db->where('id_order', $order_id);
-		$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['order'] . ".ready_by", 'LEFT');
+		$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['order'].".ready_by" , 'LEFT');
 		$query			 	= $this->db->get($this->tables['order']);
 		$rows			 	= $query->result();
 		$result				= $rows[0];
-		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not ready yet</span>" : "<span class=\"text-success\">Ready by " . $result->username . "</span>");
+		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not ready yet</span>" : "<span class=\"text-success\">Ready by ".$result->username. "</span>");
 		return $status;
 	}
 
@@ -681,18 +753,18 @@ class Order_model extends CI_Model
 	{
 		$this->db->select('delivered_by, username');
 		$this->db->where('id_order', $order_id);
-		$this->db->join($this->tables['users'], $this->tables['users'] . ".id = " . $this->tables['order'] . ".delivered_by", 'LEFT');
+		$this->db->join($this->tables['users'], $this->tables['users'].".id = ".$this->tables['order'].".delivered_by" , 'LEFT');
 		$query			 	= $this->db->get($this->tables['order']);
 		$rows			 	= $query->result();
 		$result				= $rows[0];
-		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not delivered yet</span>" : "<span class=\"text-success\">Delivered by " . $result->username . "</span>");
+		$status				= (empty($result->username) ? "<span class=\"text-warning\">Not delivered yet</span>" : "<span class=\"text-success\">Delivered by ".$result->username. "</span>");
 		return $status;
 	}
 
 	function delete_order($order_id)
 	{
 
-		$tables = array($this->tables['order'], $this->tables['order_detail']);
+		$tables = array($this->tables['order'],$this->tables['order_detail']);
 		$this->db->where('id_order', $order_id);
 		$this->db->delete($tables);
 		return TRUE;
@@ -709,7 +781,7 @@ class Order_model extends CI_Model
 	{
 
 		// Have to delete rows in these tables: order_detail, order_order, order_contact
-		$tables = array($this->tables['order'], $this->tables['order_detail']);
+		$tables = array($this->tables['order'],$this->tables['order_detail']);
 		$this->db->where('id_order', $order_id);
 		$this->db->delete($tables);
 
@@ -723,10 +795,10 @@ class Order_model extends CI_Model
 		$contact_name		= $this->input->post('contact_name');
 		$contact_email     	= $this->input->post('contact_email');
 		$contact_mobile    	= $this->input->post('contact_mobile');
-		$date_order			= explode("/", $this->input->post('order_date'));
-		$order_date			= mktime(0, 0, 0, $date_order[1], $date_order[0], $date_order[2]);
-		$date_delivery		= explode('/', $this->input->post('date_delivery'));
-		$req_delivery_date	= mktime(0, 0, 0, $date_delivery[0], $date_delivery[1], $date_delivery[2]);
+		$date_order			= explode("/",$this->input->post('order_date'));
+		$order_date			= mktime(0,0,0,$date_order[1],$date_order[0],$date_order[2]);
+		$date_delivery		= explode('/',$this->input->post('date_delivery'));
+		$req_delivery_date	= mktime(0,0,0,$date_delivery[0],$date_delivery[1],$date_delivery[2]);
 
 		$data_order 		= array(
 			'id_order'			=> $order_id,
@@ -753,7 +825,8 @@ class Order_model extends CI_Model
 		$detail_up			= $this->input->post('up');
 		$detail_extra		= $this->input->post('extra');
 		$detail_notes		= $this->input->post('notes');
-		for ($i = 0; $i < count($this->input->post('filename')); $i++) {
+		for ($i= 0; $i< count($this->input->post('filename')); $i++)
+		{
 			$data_order_detail 		= array(
 				'id_order'      	=> $id_order,
 				'detail_filename' 	=> $detail_filename[$i],
@@ -772,7 +845,8 @@ class Order_model extends CI_Model
 		}
 
 		// Get contact ID
-		if ($id_contact = $this->get_contact_detail($contact_name, $client_id, $contact_email, $contact_mobile)) {
+		if ($id_contact = $this->get_contact_detail($contact_name, $client_id, $contact_email, $contact_mobile))
+		{
 			// Update order table
 			$data_order_update 		= array(
 				'contact_id'		=> $id_contact
@@ -780,7 +854,9 @@ class Order_model extends CI_Model
 			$this->db->where('client_id', $client_id);
 			$this->db->where('id_order', $id_order);
 			$this->db->update($this->tables['order'], $data_order_update);
-		} else {
+		}
+		else
+		{
 			$data_order_contact 	= array(
 				'client_id'			=> $client_id,
 				'contact_name'      => $contact_name,
@@ -805,7 +881,7 @@ class Order_model extends CI_Model
 
 	function update_order_staff($order_id)
 	{
-		$id_to_update		= explode("-", $this->input->post("detail_id"));
+		$id_to_update		= explode("-",$this->input->post("detail_id"));
 
 		$detail_width		= $this->input->post('width');
 		$detail_height		= $this->input->post('height');
@@ -813,7 +889,8 @@ class Order_model extends CI_Model
 		$detail_up			= $this->input->post('up');
 		$detail_extra		= $this->input->post('extra');
 		$detail_notes		= $this->input->post('notes');
-		for ($i = 0; $i < count($id_to_update); $i++) {
+		for ($i= 0; $i< count($id_to_update); $i++)
+		{
 			$data_order_detail 		= array(
 				'detail_width' 		=> $detail_width[$i],
 				'detail_height'     => $detail_height[$i],
@@ -846,10 +923,10 @@ class Order_model extends CI_Model
 		$contact_name		= $this->input->post('contact_name');
 		$contact_email     	= $this->input->post('contact_email');
 		$contact_mobile    	= $this->input->post('contact_mobile');
-		$date_order			= explode("/", $this->input->post('order_date'));
-		$order_date			= mktime(0, 0, 0, $date_order[1], $date_order[0], $date_order[2]);
-		$date_delivery		= explode('/', $this->input->post('date_delivery'));
-		$req_delivery_date	= mktime(0, 0, 0, $date_delivery[0], $date_delivery[1], $date_delivery[2]);
+		$date_order			= explode("/",$this->input->post('order_date'));
+		$order_date			= mktime(0,0,0,$date_order[1],$date_order[0],$date_order[2]);
+		$date_delivery		= explode('/',$this->input->post('date_delivery'));
+		$req_delivery_date	= mktime(0,0,0,$date_delivery[0],$date_delivery[1],$date_delivery[2]);
 
 		$data_order 		= array(
 			'order_name'		=> $order_name,
@@ -876,7 +953,8 @@ class Order_model extends CI_Model
 		$detail_up			= $this->input->post('up');
 		$detail_extra		= $this->input->post('extra');
 		$detail_notes		= $this->input->post('notes');
-		for ($i = 0; $i < count($this->input->post('filename')); $i++) {
+		for ($i= 0; $i< count($this->input->post('filename')); $i++)
+		{
 			$data_order_detail 		= array(
 				'id_order'      	=> $id_order,
 				'detail_filename' 	=> $detail_filename[$i],
@@ -895,7 +973,8 @@ class Order_model extends CI_Model
 		}
 
 		// Get contact ID
-		if ($id_contact = $this->get_contact_detail($contact_name, $client_id, $contact_email, $contact_mobile)) {
+		if ($id_contact = $this->get_contact_detail($contact_name, $client_id, $contact_email, $contact_mobile))
+		{
 			// Update order table
 			$data_order_update 		= array(
 				'contact_id'		=> $id_contact
@@ -903,7 +982,9 @@ class Order_model extends CI_Model
 			$this->db->where('client_id', $client_id);
 			$this->db->where('id_order', $id_order);
 			$this->db->update($this->tables['order'], $data_order_update);
-		} else {
+		}
+		else
+		{
 			$data_order_contact 	= array(
 				'client_id'			=> $client_id,
 				'contact_name'      => $contact_name,
@@ -926,71 +1007,85 @@ class Order_model extends CI_Model
 		return TRUE;
 	}
 
-
-
-	function get_material_list($id = "")
+	function get_material_list($id="")
 	{
-		$this->db->where($this->tables['material'] . '.is_deleted', '0');
-		if ($id != "") {
+		$this->db->where($this->tables['material'].'.is_deleted', '0');
+		if ($id != "")
+		{
 			$id = (int) $id;
-			$this->db->where($this->tables['material'] . '.id_material', $id);
-		} else {
+			$this->db->where($this->tables['material'].'.id_material', $id);
+		}
+		else
+		{
 			$material[""]	= "--";
 		}
 		$query			 	= $this->db->get($this->tables['material']);
 		$rows			 	= $query->result();
-		for ($i = 0; $i < count($rows); $i++) {
+		for ($i= 0; $i< count($rows); $i++)
+		{
 			$data_row				= $rows[$i];
 			$material[$data_row->id_material] = $data_row->material_name;
 		}
 		return $material;
 	}
-	function get_lamination_list($id = "")
+	function get_lamination_list($id="")
 	{
-		$this->db->where($this->tables['lamination'] . '.is_deleted', '0');
-		if ($id != "") {
+		$this->db->where($this->tables['lamination'].'.is_deleted', '0');
+		if ($id != "")
+		{
 			$id = (int) $id;
-			$this->db->where($this->tables['lamination'] . '.id_lamination', $id);
-		} else {
+			$this->db->where($this->tables['lamination'].'.id_lamination', $id);
+		}
+		else
+		{
 			$lamination[""]	= "--";
 		}
 		$query			 	= $this->db->get($this->tables['lamination']);
 		$rows			 	= $query->result();
-		for ($i = 0; $i < count($rows); $i++) {
+		for ($i= 0; $i< count($rows); $i++)
+		{
 			$data_row				= $rows[$i];
 			$lamination[$data_row->id_lamination] = $data_row->lamination_name;
 		}
 		return $lamination;
 	}
-	function get_quality_list($id = "")
+	function get_quality_list($id="")
 	{
-		$this->db->where($this->tables['quality'] . '.is_deleted', '0');
-		if ($id != "") {
+		$this->db->where($this->tables['quality'].'.is_deleted', '0');
+		if ($id != "")
+		{
 			$id = (int) $id;
-			$this->db->where($this->tables['quality'] . '.id_quality', $id);
-		} else {
+			$this->db->where($this->tables['quality'].'.id_quality', $id);
+		}
+		else
+		{
 			$quality[""]	= "--";
 		}
 		$query			 	= $this->db->get($this->tables['quality']);
 		$rows			 	= $query->result();
-		for ($i = 0; $i < count($rows); $i++) {
+		for ($i= 0; $i< count($rows); $i++)
+		{
 			$data_row				= $rows[$i];
 			$quality[$data_row->id_quality] = $data_row->quality_name;
 		}
 		return $quality;
 	}
-	function get_finishing_list($id = "")
+	function get_finishing_list($id="")
 	{
-		$this->db->where($this->tables['finishing'] . '.is_deleted', '0');
-		if ($id != "") {
+		$this->db->where($this->tables['finishing'].'.is_deleted', '0');
+		if ($id != "")
+		{
 			$id = (int) $id;
-			$this->db->where($this->tables['finishing'] . '.id_finishing', $id);
-		} else {
+			$this->db->where($this->tables['finishing'].'.id_finishing', $id);
+		}
+		else
+		{
 			$finishing[""]	= "--";
 		}
 		$query			 	= $this->db->get($this->tables['finishing']);
 		$rows			 	= $query->result();
-		for ($i = 0; $i < count($rows); $i++) {
+		for ($i= 0; $i< count($rows); $i++)
+		{
 			$data_row				= $rows[$i];
 			$finishing[$data_row->id_finishing] = $data_row->finishing_name;
 		}
@@ -1043,16 +1138,19 @@ class Order_model extends CI_Model
 
 	function get_payment_status($order_id)
 	{
-		$this->db->where($this->tables['payment'] . '.order_id', $order_id);
+		$this->db->where($this->tables['payment'].'.order_id', $order_id);
 		$query			 	= $this->db->get($this->tables['payment']);
 		$rows			 	= $query->result();
-		if (count($rows) == 0) {
+		if (count($rows) == 0)
+		{
 			$data['order_id']	= $order_id;
 			$data['invoiced']	= 0;
 			$data['partial']	= 0;
 			$data['full']		= 0;
 			$this->db->insert($this->tables['payment'], $data);
-		} else {
+		}
+		else
+		{
 			$data_row			= $rows[0];
 			$data['invoiced']	= $data_row->invoiced;
 			$data['partial']	= $data_row->partial;
@@ -1088,17 +1186,20 @@ class Order_model extends CI_Model
 		//~ $template_notes 		= $this->input->post("notes");
 		$j = 0;
 
-		if (count($decoded_json) > 0) {
+		if (count($decoded_json) > 0)
+		{
 			// Let's truncate the table first
 			$this->db->truncate($this->tables['template']);
 
 			$template_category = 0; // Category ID
-			for ($i = 0; $i < count($decoded_json); $i++) {
+			for($i=0; $i< count($decoded_json); $i++)
+			{
 				$the_row =	$decoded_json[$i];
 				$template_filename		= $the_row->filename;
 				// Check if the filename is not empty
 				// If it's not empty, continue
-				if (strlen($template_filename) > 0) {
+				if (strlen($template_filename) > 0)
+				{
 					$template_width			= $the_row->width;
 					$template_height		= $the_row->height;
 					$template_quantity		= $the_row->quantity;
@@ -1106,62 +1207,42 @@ class Order_model extends CI_Model
 					$template_lamination	= $the_row->lamination;
 					$template_quality		= $the_row->quality;
 					$template_finishing		= $the_row->finishing;
-					$username				= $the_row->username;
 
 					// This is category name
-					for ($k = 0; $k < 2; $k++) {
-						if (($template_width == 0) and ($template_height == 0)) {
-							$template_category++;
-							$j = 0;
-							$template_number 	= $j;
-							$data = array(
-								"template_category" => $template_category,
-								"template_number" => $j,
-								"template_filename" => htmlentities($template_filename, ENT_QUOTES),
-								"template_width" => 0,
-								"template_height" => 0,
-								"username" => $username,
-							);
-							// Make an insert query that sets username for all the templates with the same category
-							$this->db->set('username', $username);
-							$this->db->where('template_category', $template_category);
-							$this->db->update($this->tables['template']);
-						}
-						// Else, it's the template content
-						else {
-							$data = array(
-								"template_category" 	=> $template_category,
-								"template_number" 	=> $j,
-								"template_filename" => htmlentities($template_filename, ENT_QUOTES),
-								"template_width" 	=> $template_width,
-								"template_height" 	=> $template_height,
-								"template_quantity" => $template_quantity,
-								"template_material" => $template_material,
-								"template_lamination" => $template_lamination,
-								"template_quality" 	=> $template_quality,
-								"template_finishing" => $template_finishing,
-								"username" 			=> $username,
-							);
-							//~ "template_up" 		=> $template_up,
-							//~ "template_extra" 	=> $template_extra,
-							//~ "template_notes" 	=> $template_notes);
-						}
+					if (($template_width == 0) AND ($template_height == 0))
+					{
+						$template_category++;
+						$j = 0;
+						$template_number 	= $j;
+						$data = array ("template_category" => $template_category,
+										"template_number" => $j,
+										"template_filename" => htmlentities($template_filename, ENT_QUOTES),
+										"template_width" => 0,
+										"template_height" => 0);
+					}
+					// Else, it's the template content
+					else
+					{
+						$data = array ("template_category" 	=> $template_category,
+										"template_number" 	=> $j,
+										"template_filename" => htmlentities($template_filename, ENT_QUOTES),
+										"template_width" 	=> $template_width,
+										"template_height" 	=> $template_height,
+										"template_quantity" => $template_quantity,
+										"template_material" => $template_material,
+										"template_lamination" => $template_lamination,
+										"template_quality" 	=> $template_quality,
+										"template_finishing" => $template_finishing);
+										//~ "template_up" 		=> $template_up,
+										//~ "template_extra" 	=> $template_extra,
+										//~ "template_notes" 	=> $template_notes);
 					}
 					$j++;
-
-
-
 					$this->db->insert($this->tables['template'], $data);
 				}
 			}
 		}
 	}
-	function get_material_name($id)
-	{
-		$this->db->where('id_material', $id);
-		$query			 	= $this->db->get($this->tables['material']);
-		$rows			 	= $query->result();
-		$data_row			= $rows[0];
-		return $data_row->material_name;
-	}
 }
+
+ ?>

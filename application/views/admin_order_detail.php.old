@@ -51,7 +51,7 @@
 		<th>Finishing</th>
 		<th>UP</th>
 		<th>Extra</th>
-		<th>Cost</th>
+		<th>Total</th>
 		<th>Notes</th>
 	</tr>
 	</thead>
@@ -87,13 +87,12 @@
 		<td><div id="grand_qty"><?php echo $grand_qty ?></div></td>
 		<td><div id="grand_size"><?php echo $grand_size ?></div></td>
 		<td colspan="6" align="right"><strong>Total Cost</strong></td>
-		<td><?php echo $grand_cost ?></td>
+		<td><div id="grand_cost"><?php echo $grand_cost ?></div></td>
+		<td></td>
 	</tr>
 	</tfoot>
 	</table>
-	<br>
 	<?php
-	echo anchor('/client/order_copy/'. $order_id, 'Copy to new order', 'role="button" class="btn btn-info"'); 
 	}
 	?>
 </div>
